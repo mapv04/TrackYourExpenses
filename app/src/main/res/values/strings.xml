@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">TrackYourExpenses</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="username">Username</string>
+    <string name="name">Name</string>
+    <string name="create_account">Don\'t have an account</string>
+    <string name="user_exists">The username already exists</string>
+    <string name="empty_field">This can\'t be empty</string>
+    <string name="sign_up_success">You signed up correctly</string>
+    <string name="authentication_fail">Username or password incorrect</string>
+    <string name="account_name">Account name</string>
+    <string name="color">Color:</string>
+    <string name="add_image">Add image:</string>
+    <string name="save_account">Save Account</string>
+    <string name="select_picture">Select Picture</string>
+</resources>

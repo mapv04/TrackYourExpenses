@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable name="viewmodel"
+                  type="com.miguel.android.trackyourexpenses.viewmodel.LoginViewModel"/>
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <EditText
+            android:id="@+id/mUsername"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:text="@={viewmodel.editTextUsername}"
+            android:hint="@string/username"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+            android:id="@+id/mPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:text="@={viewmodel.editTextPassword}"
+            android:hint="@string/password"
+            app:layout_constraintEnd_toEndOf="@+id/mUsername"
+            app:layout_constraintStart_toStartOf="@+id/mUsername"
+            app:layout_constraintTop_toBottomOf="@+id/mUsername" />
+
+    <Button
+            android:id="@+id/mLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/login"
+            android:onClick="@{() -> viewmodel.onLoginButtonClick()}"
+            android:backgroundTint="@android:color/white"
+            app:layout_constraintEnd_toEndOf="@+id/mPassword"
+            app:layout_constraintStart_toStartOf="@+id/mPassword"
+            app:layout_constraintTop_toBottomOf="@+id/mPassword" />
+
+    <TextView
+            android:id="@+id/mSignUp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:text="@string/create_account"
+            app:layout_constraintEnd_toEndOf="@+id/mLogin"
+            app:layout_constraintStart_toStartOf="@+id/mLogin"
+            app:layout_constraintTop_toBottomOf="@+id/mLogin" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
