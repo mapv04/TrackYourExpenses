@@ -18,5 +18,7 @@ class DashboardViewModel(
 
     fun getAllAccounts() = allAccounts
 
+    fun deleteAccount(account: Accounts) = repository.deleteAccountById(account)
+
 
 }

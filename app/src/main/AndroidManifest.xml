@@ -19,6 +19,7 @@
         <activity android:name="com.miguel.android.trackyourexpenses.ui.activity.RegisterActivity"/>
         <activity android:name="com.miguel.android.trackyourexpenses.ui.activity.DashboardActivity"/>
         <activity android:name=".ui.activity.NewAccountActivity"/>
+        <activity android:name=".ui.activity.AccountDetailsActivity"/>
     </application>
 
 </manifest>

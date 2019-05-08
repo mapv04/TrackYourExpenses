@@ -2,6 +2,7 @@ package com.miguel.android.trackyourexpenses.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.miguel.android.trackyourexpenses.database.entity.Accounts
@@ -14,4 +15,7 @@ interface AccountsDao {
 
     @Insert
     fun addNewAccount(account: Accounts)
+
+    @Delete
+    fun deleteAccount(account: Accounts)
 }

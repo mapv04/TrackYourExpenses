@@ -24,6 +24,17 @@ class AccountRepository(private val accountDao: AccountsDao) {
 
     fun getAllAcoountsById(id: Int) : LiveData<List<Accounts>> = GetAccountsAsyncTask(accountDao).execute(id).get()
 
+    @SuppressLint("CheckResult")
+    fun deleteAccountById(account: Accounts) {
+        Observable.just(account)
+            .observeOn(Schedulers.io())
+            .subscribeOn(AndroidSchedulers.mainThread())
+            .subscribe({ account ->
+                accountDao.deleteAccount(account)
+            }, { error -> Log.e(TAG, "Error deleting the account: ", error) })
+    }
+
+
 
 
     companion object{
