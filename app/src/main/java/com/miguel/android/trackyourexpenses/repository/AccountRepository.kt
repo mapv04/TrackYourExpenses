@@ -3,6 +3,7 @@ package com.miguel.android.trackyourexpenses.repository
 import android.annotation.SuppressLint
 import android.os.AsyncTask
 import android.util.Log
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.miguel.android.trackyourexpenses.database.dao.AccountsDao
 import com.miguel.android.trackyourexpenses.database.entity.Accounts
@@ -12,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
 
 class AccountRepository(private val accountDao: AccountsDao) {
 
-    @SuppressLint("CheckResult")
+    /*@SuppressLint("CheckResult")
     fun addNewAccount(account: Accounts){
         Observable.just(account)
             .observeOn(Schedulers.io())
@@ -20,7 +21,10 @@ class AccountRepository(private val accountDao: AccountsDao) {
             .subscribe({account ->
                 accountDao.addNewAccount(account)
             }, {error -> Log.e(TAG, "Error creating the new account", error)})
-    }
+    }*/
+
+    @WorkerThread
+    suspend fun addNewAccount(account: Accounts) = accountDao.addNewAccount(account)
 
     fun getAllAcoountsById(id: Int) : LiveData<List<Accounts>> = GetAccountsAsyncTask(accountDao).execute(id).get()
 

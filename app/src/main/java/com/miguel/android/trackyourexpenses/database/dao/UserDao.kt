@@ -19,7 +19,7 @@ interface UserDao {
     fun checkIfExists(username: String?): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertNewUser(user: User?)
+    suspend fun insertNewUser(user: User)
 
     @Query("SELECT * FROM accounts WHERE user_id = :id")
     fun getAllAccountsByUserId(id: Int): Accounts?

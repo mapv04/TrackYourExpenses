@@ -3,6 +3,7 @@ package com.miguel.android.trackyourexpenses.repository
 import android.annotation.SuppressLint
 import android.os.AsyncTask
 import android.util.Log
+import androidx.annotation.WorkerThread
 import com.miguel.android.trackyourexpenses.database.dao.UserDao
 import com.miguel.android.trackyourexpenses.database.entity.User
 import io.reactivex.Observable
@@ -10,6 +11,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.withContext
 
 
 class UserRepository(private val userDao: UserDao) {
@@ -19,17 +21,8 @@ class UserRepository(private val userDao: UserDao) {
 
     fun checkIfExists(username: String) = CheckAsyncTask(userDao).execute(username)
 
-    @SuppressLint("CheckResult")
-    fun addNewUser(user: User){
-        Observable.just(user)
-            .observeOn(Schedulers.io())
-            .subscribeOn(AndroidSchedulers.mainThread())
-            .subscribe({user ->
-                userDao.insertNewUser(user)
-            }, {error -> Log.e(TAG, "Error adding the new user: ", error)})
-    }
-
-
+    @WorkerThread // this method needs to be called from a non-UI thread
+    suspend fun addNewUser(user: User) = userDao.insertNewUser(user)
 
 
 
@@ -47,7 +40,7 @@ class UserRepository(private val userDao: UserDao) {
 
 
     /*
-    ////ASYCNTASK
+    ////ASYNCTASK
      */
 
     class CheckAsyncTask(dao: UserDao): AsyncTask<String?, Void, Int>(){

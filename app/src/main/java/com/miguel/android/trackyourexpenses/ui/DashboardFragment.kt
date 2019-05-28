@@ -142,6 +142,11 @@ class DashboardFragment : Fragment() {
         model.deleteAccount(account)
     }
 
+
+    /**
+     * ACCOUNT ADAPTER
+     */
+
     private inner class AccountAdapter(listAccounts: List<Accounts>) : RecyclerView.Adapter<AccountAdapter.AccountHolder>() {
         var list: List<Accounts> = listAccounts
 
@@ -162,6 +167,9 @@ class DashboardFragment : Fragment() {
             notifyDataSetChanged()
         }
 
+        /**
+         * ACCOUNT VIEW HOLDER
+         */
         private inner class AccountHolder(inflater: LayoutInflater, parent: ViewGroup) :
             RecyclerView.ViewHolder(inflater.inflate(R.layout.account_item, parent, false)), View.OnClickListener{
 

@@ -14,7 +14,7 @@ interface AccountsDao {
     fun getAllAccounts(id: Int): LiveData<List<Accounts>>
 
     @Insert
-    fun addNewAccount(account: Accounts)
+    suspend fun addNewAccount(account: Accounts)
 
     @Delete
     fun deleteAccount(account: Accounts)

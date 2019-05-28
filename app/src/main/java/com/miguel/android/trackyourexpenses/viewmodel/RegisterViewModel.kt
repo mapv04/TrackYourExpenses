@@ -1,12 +1,13 @@
 package com.miguel.android.trackyourexpenses.viewmodel
 
-import androidx.databinding.Bindable
-import androidx.databinding.InverseMethod
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.miguel.android.trackyourexpenses.database.entity.User
 import com.miguel.android.trackyourexpenses.repository.UserRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class RegisterViewModel(
@@ -43,5 +44,7 @@ class RegisterViewModel(
     fun userExists(username: String): Int = repository.checkIfExists(username).get()
 
 
-    fun addNewUser(user: User) = repository.addNewUser(user)
+    fun addNewUser(user: User) = viewModelScope.launch(Dispatchers.IO){
+        repository.addNewUser(user)
+    }
 }

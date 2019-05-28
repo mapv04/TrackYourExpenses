@@ -16,4 +16,6 @@
     <string name="add_image">Add image:</string>
     <string name="save_account">Save Account</string>
     <string name="select_picture">Select Picture</string>
+    <string name="income">Incomes</string>
+    <string name="expenses">Expenses</string>
 </resources>

@@ -56,7 +56,7 @@ class NewAccountFragment : Fragment(){
             colorPicker.show()
             colorPicker.enableAutoClose()
             colorPicker.setCallback { color ->
-                val alpha = Color.alpha(color)
+                val alpha = 95 // to make de color more transparent
                 val red = Color.red(color)
                 val green = Color.green(color)
                 val blue = Color.blue(color)
