@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.viewmodel.RegisterViewModel
 import com.miguel.android.trackyourexpenses.databinding.FragmentRegisterBinding
@@ -25,6 +28,13 @@ class RegisterFragment: Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
+        binding.apply {
+            this.lifecycleOwner = this@RegisterFragment
+            this.viewmodel = model
+        }
+
         // Add the new user to Room
        model.user.observe(this, Observer {
            if(model.userExists(it.username) > 0){
@@ -33,10 +43,10 @@ class RegisterFragment: Fragment() {
            } else{
                //ADD THE NEW USER
                model.addNewUser(it)
+
                Toast.makeText(activity, R.string.sign_up_success, Toast.LENGTH_SHORT).show()
-               val intent = Intent(activity, LoginActivity::class.java)
-               startActivity(intent)
-               activity?.finish()
+
+               view?.findNavController()?.navigate(R.id.action_registerFragment_to_loginFragment)
            }
 
        })
@@ -52,14 +62,9 @@ class RegisterFragment: Fragment() {
             ViewModelProviders.of(this, factory).get(RegisterViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        binding = FragmentRegisterBinding.inflate(layoutInflater)
-        binding.apply {
-            this.lifecycleOwner = this@RegisterFragment
-            this.viewmodel = model
-        }
 
     }
-
+    
 
 
     companion object{

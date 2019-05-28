@@ -62,6 +62,8 @@ dependencies {
 
     // Color picker
     implementation 'com.pes.materialcolorpicker:library:1.2.5'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
 
 
 }

@@ -7,14 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.miguel.android.trackyourexpenses.viewmodel.LoginViewModel
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.databinding.FragmentLoginBinding
 import com.miguel.android.trackyourexpenses.ui.activity.DashboardActivity
-import com.miguel.android.trackyourexpenses.ui.activity.RegisterActivity
 import kotlinx.android.synthetic.main.fragment_login.*
 import com.miguel.android.trackyourexpenses.utils.InjectorUtils
 
@@ -24,6 +25,13 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
+
+        binding.apply {
+            this.lifecycleOwner = this@LoginFragment
+            this.viewmodel = model
+        }
 
         model.user.observe(this, Observer {
             Log.i(TAG, "observer...")
@@ -43,11 +51,9 @@ class LoginFragment : Fragment() {
             }
         })
 
-        binding.mSignUp.setOnClickListener {
-            val intent = Intent(activity, RegisterActivity::class.java)
-            startActivity(intent)
-            activity?.finish()
-        }
+        binding.mSignUp.setOnClickListener (
+            Navigation.createNavigateOnClickListener(R.id.action_loginFragment_to_registerFragment)
+        )
 
         return binding.root
     }
@@ -59,11 +65,6 @@ class LoginFragment : Fragment() {
             ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        binding = FragmentLoginBinding.inflate(layoutInflater)
-        binding.apply {
-            this.lifecycleOwner = this@LoginFragment
-            this.viewmodel = model
-        }
     }
 
 

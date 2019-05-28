@@ -11,8 +11,8 @@ class DashboardActivity : SingleFragmentActivity(), DashboardFragment.Callbacks,
      * Delete the selected account
      */
     override fun onAccountIdSelected(account: Accounts) {
-        val accountListFragment =  supportFragmentManager.findFragmentById(R.id.fragment_container) as DashboardFragment
-        accountListFragment.deleteAccount(account)
+       /* val accountListFragment =  supportFragmentManager.findFragmentById(R.id.fragment_container) as DashboardFragment
+        accountListFragment.deleteAccount(account)*/
     }
 
     /**
