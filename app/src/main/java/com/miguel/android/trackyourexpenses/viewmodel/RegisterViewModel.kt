@@ -44,7 +44,16 @@ class RegisterViewModel(
     fun userExists(username: String): Int = repository.checkIfExists(username).get()
 
 
-    fun addNewUser(user: User) = viewModelScope.launch(Dispatchers.IO){
-        repository.addNewUser(user)
+    fun addNewUser(user: User) = viewModelScope.launch(Dispatchers.IO) {
+            repository.addNewUser(user)
+        }
+
+    fun onUserCreated(){
+        _user.value = null
     }
+
+    override fun onCleared() {
+        super.onCleared()
+    }
+
 }

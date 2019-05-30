@@ -10,21 +10,16 @@ import com.miguel.android.trackyourexpenses.database.entity.Accounts
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class AccountRepository(private val accountDao: AccountsDao) {
 
-    /*@SuppressLint("CheckResult")
-    fun addNewAccount(account: Accounts){
-        Observable.just(account)
-            .observeOn(Schedulers.io())
-            .subscribeOn(AndroidSchedulers.mainThread())
-            .subscribe({account ->
-                accountDao.addNewAccount(account)
-            }, {error -> Log.e(TAG, "Error creating the new account", error)})
-    }*/
+    suspend fun addNewAccount(account: Accounts) =
+        withContext(Dispatchers.IO) {
+            accountDao.addNewAccount(account)
+        }
 
-    @WorkerThread
-    suspend fun addNewAccount(account: Accounts) = accountDao.addNewAccount(account)
 
     fun getAllAcoountsById(id: Int) : LiveData<List<Accounts>> = GetAccountsAsyncTask(accountDao).execute(id).get()
 

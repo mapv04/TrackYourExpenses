@@ -37,16 +37,21 @@ class RegisterFragment: Fragment() {
 
         // Add the new user to Room
        model.user.observe(this, Observer {
-           if(model.userExists(it.username) > 0){
-               // The user already exists
-               Toast.makeText(activity, R.string.user_exists, Toast.LENGTH_LONG).show()
-           } else{
-               //ADD THE NEW USER
-               model.addNewUser(it)
+           if(it != null){
+               if(model.userExists(it.username) > 0){
+                   // The user already exists
+                   Toast.makeText(activity, R.string.user_exists, Toast.LENGTH_LONG).show()
+               } else {
+                   //ADD THE NEW USER
+                   model.addNewUser(it)
+                   Toast.makeText(activity, R.string.sign_up_success, Toast.LENGTH_SHORT).show()
+                   clearData()
+                   model.onUserCreated()
 
-               Toast.makeText(activity, R.string.sign_up_success, Toast.LENGTH_SHORT).show()
+                   view?.findNavController()?.navigate(R.id.action_registerFragment_to_loginFragment)
 
-               view?.findNavController()?.navigate(R.id.action_registerFragment_to_loginFragment)
+                }
+
            }
 
        })
@@ -64,8 +69,13 @@ class RegisterFragment: Fragment() {
 
 
     }
-    
 
+    private fun clearData(){
+        binding.emailEditText.text = null
+        binding.nameEditText.text = null
+        binding.passwordEditText.text = null
+        binding.usernameEditText.text = null
+    }
 
     companion object{
         private const val TAG = "RegisterFragment"
