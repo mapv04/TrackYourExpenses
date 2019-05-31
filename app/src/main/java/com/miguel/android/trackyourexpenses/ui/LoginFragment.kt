@@ -72,6 +72,5 @@ class LoginFragment : Fragment() {
     companion object{
         private const val TAG = "LoginFragment"
         const val EXTRA_USER_ID = "com.miguel.android.moneymanager.ui.activity.user_id"
-        fun newInstance() = LoginFragment()
     }
 }

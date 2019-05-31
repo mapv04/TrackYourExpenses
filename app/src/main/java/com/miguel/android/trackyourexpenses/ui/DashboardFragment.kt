@@ -1,7 +1,6 @@
 package com.miguel.android.trackyourexpenses.ui
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -16,15 +15,14 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.database.entity.Accounts
-import com.miguel.android.trackyourexpenses.ui.activity.NewAccountActivity
 import com.miguel.android.trackyourexpenses.utils.InjectorUtils
 import com.miguel.android.trackyourexpenses.viewmodel.DashboardViewModel
-import kotlinx.android.synthetic.main.fragment_account_list.*
 import kotlinx.android.synthetic.main.fragment_account_list.view.*
 
 class DashboardFragment : Fragment() {
@@ -39,10 +37,10 @@ class DashboardFragment : Fragment() {
      * Required interface for hosting activities
      */
     interface Callbacks{
-        fun onAccountSelected(account: Accounts?)
+        fun onAccountSelected(account: Accounts?, view: View?)
     }
     interface onDeleteAccountListener{
-        fun onAccountIdSelected(account: Accounts)
+        fun onAccountIdSelected(account: Accounts, fragment: DashboardFragment)
     }
 
     override fun onAttach(context: Context?) {
@@ -67,11 +65,9 @@ class DashboardFragment : Fragment() {
             adapter = accountAdapter
         }
 
-        view.fab.setOnClickListener {
-            val intent = Intent(activity, NewAccountActivity::class.java)
-            intent.putExtra(NewAccountFragment.EXTRA_USER_ID, userId)
-            startActivity(intent)
-        }
+        view.fab.setOnClickListener (
+           Navigation.createNavigateOnClickListener(R.id.action_dashboardFragment_to_newAccountFragment)
+        )
 
         model.getAllAccounts().observe(this, Observer {
             accountAdapter.setNewAccounts(it)
@@ -107,7 +103,7 @@ class DashboardFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val account = accountAdapter.list[position]
-                mDeleteCallBack?.onAccountIdSelected(account)
+                mDeleteCallBack?.onAccountIdSelected(account, this@DashboardFragment)
             }
 
             override fun onChildDraw(
@@ -193,7 +189,7 @@ class DashboardFragment : Fragment() {
             }
 
             override fun onClick(v: View?) {
-                this@DashboardFragment.mCallBack?.onAccountSelected(mAccount)
+                this@DashboardFragment.mCallBack?.onAccountSelected(mAccount, v)
             }
         }
     }
@@ -202,7 +198,6 @@ class DashboardFragment : Fragment() {
     companion object{
         private const val TAG="DashboardFragment"
         const val EXTRA_USER_ID = "com.miguel.android.moneymanager.ui.user_id"
-        fun newInstance() = DashboardFragment()
     }
 
 

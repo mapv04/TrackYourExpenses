@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -43,6 +44,12 @@ class NewAccountFragment : Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var gradientColor = 0
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_new_account, container, false)
+        binding.apply {
+            this.lifecycleOwner = this@NewAccountFragment
+            this.viewmodel = model
+        }
 
         binding.addImage.setOnClickListener {
             val intent = Intent()
@@ -105,11 +112,6 @@ class NewAccountFragment : Fragment(){
             ViewModelProviders.of(this, factory).get(NewAccountViewModel::class.java)
         } ?: throw Exception("Invalid activity")
 
-        binding = FragmentNewAccountBinding.inflate(layoutInflater)
-        binding.apply {
-            this.lifecycleOwner = this@NewAccountFragment
-            this.viewmodel = model
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
