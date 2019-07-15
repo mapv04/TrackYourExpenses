@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.miguel.android.trackyourexpenses.database.entity.User
-import com.miguel.android.trackyourexpenses.repository.UserRepository
+import com.miguel.android.trackyourexpenses.data.database.entity.User
+import com.miguel.android.trackyourexpenses.data.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -16,6 +16,7 @@ class RegisterViewModel(
 
     private val _user = MutableLiveData<User>()
     val editTextName = MutableLiveData<String>()
+    val editTextLastName = MutableLiveData<String>()
     val editTextUsername = MutableLiveData<String>()
     val editTextEmail = MutableLiveData<String>()
     val editTextPassword = MutableLiveData<String>()
@@ -26,11 +27,12 @@ class RegisterViewModel(
 
 
     fun onSignUpButtonClick(){
-        if(editTextName.value != null && editTextUsername.value != null &&
+        if(editTextName.value != null && editTextLastName.value != null && editTextUsername.value != null &&
             editTextEmail.value != null && editTextPassword.value != null) {
 
             val newUser = User(
                 null, editTextName.value!!,
+                editTextLastName.value!!,
                 editTextUsername.value!!,
                 editTextEmail.value!!,
                 editTextPassword.value!!

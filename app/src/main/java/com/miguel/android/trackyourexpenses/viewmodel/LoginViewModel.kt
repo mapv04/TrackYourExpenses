@@ -3,8 +3,8 @@ package com.miguel.android.trackyourexpenses.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.miguel.android.trackyourexpenses.database.entity.User
-import com.miguel.android.trackyourexpenses.repository.UserRepository
+import com.miguel.android.trackyourexpenses.data.database.entity.User
+import com.miguel.android.trackyourexpenses.data.repository.UserRepository
 
 
 class LoginViewModel(

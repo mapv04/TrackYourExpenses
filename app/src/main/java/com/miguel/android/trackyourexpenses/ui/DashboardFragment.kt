@@ -20,8 +20,9 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miguel.android.trackyourexpenses.R
-import com.miguel.android.trackyourexpenses.database.entity.Accounts
-import com.miguel.android.trackyourexpenses.utils.InjectorUtils
+import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
+import com.miguel.android.trackyourexpenses.common.InjectorUtils
+import com.miguel.android.trackyourexpenses.data.api.response.Account
 import com.miguel.android.trackyourexpenses.viewmodel.DashboardViewModel
 import kotlinx.android.synthetic.main.fragment_account_list.view.*
 
@@ -32,15 +33,16 @@ class DashboardFragment : Fragment() {
     private var userId: Int? = null
     private var mDeleteCallBack: onDeleteAccountListener? = null
     private var mCallBack: Callbacks? = null
+    private var listAccounts: List<Account> = emptyList()
 
     /**
      * Required interface for hosting activities
      */
     interface Callbacks{
-        fun onAccountSelected(account: Accounts?, view: View?)
+        fun onAccountSelected(account: Account?, view: View?)
     }
     interface onDeleteAccountListener{
-        fun onAccountIdSelected(account: Accounts, fragment: DashboardFragment)
+        fun onAccountIdSelected(account: Account, fragment: DashboardFragment)
     }
 
     override fun onAttach(context: Context?) {
@@ -58,7 +60,7 @@ class DashboardFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_account_list, container, false)
 
-        accountAdapter = AccountAdapter(emptyList())
+        accountAdapter = AccountAdapter(listAccounts)
 
         view.mRecyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
@@ -134,7 +136,7 @@ class DashboardFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(v.mRecyclerView)
     }
 
-    fun deleteAccount(account: Accounts){
+    fun deleteAccount(account: Account){
         model.deleteAccount(account)
     }
 
@@ -143,8 +145,8 @@ class DashboardFragment : Fragment() {
      * ACCOUNT ADAPTER
      */
 
-    private inner class AccountAdapter(listAccounts: List<Accounts>) : RecyclerView.Adapter<AccountAdapter.AccountHolder>() {
-        var list: List<Accounts> = listAccounts
+    private inner class AccountAdapter(listAccounts: List<Account>) : RecyclerView.Adapter<AccountAdapter.AccountHolder>() {
+        var list: List<Account> = listAccounts
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AccountHolder {
             val inflater = LayoutInflater.from(parent.context)
@@ -154,11 +156,11 @@ class DashboardFragment : Fragment() {
         override fun getItemCount(): Int = list.size
 
         override fun onBindViewHolder(holder: AccountHolder, position: Int) {
-            val account: Accounts = list[position]
+            val account: Account = list[position]
             holder.bind(account)
         }
 
-        fun setNewAccounts(newAccounts: List<Accounts>){
+        fun setNewAccounts(newAccounts: List<Account>){
             list = newAccounts
             notifyDataSetChanged()
         }
@@ -172,7 +174,7 @@ class DashboardFragment : Fragment() {
             private var mTitle: TextView? = null
             private var mLastUpdate: TextView? = null
             private var mCardView: CardView? = null
-            private var mAccount: Accounts? = null
+            private var mAccount: Account? = null
 
             init {
                 itemView.setOnClickListener(this)
@@ -181,9 +183,9 @@ class DashboardFragment : Fragment() {
                 mCardView = itemView.findViewById(R.id.carview)
             }
 
-            fun bind(account: Accounts){
+            fun bind(account: Account){
                 mAccount = account
-                mCardView?.setCardBackgroundColor(mAccount!!.color)
+                mCardView?.setCardBackgroundColor(mAccount?.color!!)
                 mTitle?.text = mAccount?.name
                 mLastUpdate?.text = mAccount?.lastUpdate
             }

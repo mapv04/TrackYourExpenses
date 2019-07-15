@@ -2,15 +2,16 @@ package com.miguel.android.trackyourexpenses.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.miguel.android.trackyourexpenses.database.entity.Accounts
-import com.miguel.android.trackyourexpenses.repository.AccountRepository
+import com.miguel.android.trackyourexpenses.data.api.response.Account
+import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
+import com.miguel.android.trackyourexpenses.data.repository.AccountRepository
 
 class DashboardViewModel(
     private val repository: AccountRepository,
     val userId: Int
 ): ViewModel() {
 
-    private val allAccounts: LiveData<List<Accounts>>
+    private val allAccounts: LiveData<List<Account>>
 
     init{
         allAccounts = repository.getAllAcoountsById(userId)
@@ -18,7 +19,7 @@ class DashboardViewModel(
 
     fun getAllAccounts() = allAccounts
 
-    fun deleteAccount(account: Accounts) = repository.deleteAccountById(account)
+    fun deleteAccount(account: Account) = repository.deleteAccountById(account)
 
 
 }

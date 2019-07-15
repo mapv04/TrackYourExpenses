@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.miguel.android.trackyourexpenses.database.entity.Accounts
-import com.miguel.android.trackyourexpenses.repository.AccountRepository
+import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
+import com.miguel.android.trackyourexpenses.data.repository.AccountRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
