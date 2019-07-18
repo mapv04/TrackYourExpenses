@@ -38,8 +38,8 @@ object InjectorUtils{
         return NewAccountViewModelFactory(repository)
     }
 
-    fun provideDashboardViewModelFactory(context: Context, userId: Int): DashboardViewModelFactory{
+    fun provideDashboardViewModelFactory(context: Context): DashboardViewModelFactory{
         val repository = getAccountRepository(context)
-        return DashboardViewModelFactory(repository, userId)
+        return DashboardViewModelFactory(repository)
     }
 }

@@ -31,7 +31,7 @@ class RegisterViewModel(
             editTextEmail.value != null && editTextPassword.value != null) {
 
             val newUser = User(
-                null, editTextName.value!!,
+                "", editTextName.value!!,
                 editTextLastName.value!!,
                 editTextUsername.value!!,
                 editTextEmail.value!!,

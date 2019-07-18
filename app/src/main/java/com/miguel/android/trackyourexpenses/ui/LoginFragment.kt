@@ -1,6 +1,7 @@
 package com.miguel.android.trackyourexpenses.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,9 +49,9 @@ class LoginFragment : Fragment() {
             call.enqueue(object: Callback<ResponseAuth> {
                 override fun onResponse(call: Call<ResponseAuth>, response: Response<ResponseAuth>) {
                     if(response.isSuccessful){
-                        SharedPreferencesManager.setSomeStringValue(PREF_TOKEN, response.body()?.token.toString(), activity!!.applicationContext)
-                        SharedPreferencesManager.setSomeStringValue(PREF_NAME, response.body()?.name.toString() + " " + response.body()?.lastname.toString(), activity!!.applicationContext)
-                        SharedPreferencesManager.setSomeStringValue(PREF_USERNAME, response.body()?.username.toString(), activity!!.applicationContext)
+                        SharedPreferencesManager.setSomeStringValue(PREF_TOKEN, response.body()?.token.toString())
+                        SharedPreferencesManager.setSomeStringValue(PREF_NAME, response.body()?.name.toString() + " " + response.body()?.lastname.toString())
+                        SharedPreferencesManager.setSomeStringValue(PREF_USERNAME, response.body()?.username.toString())
                         view?.findNavController()?.navigate(R.id.action_loginFragment_to_dashboardFragment)
                     }
                     else{
@@ -61,6 +62,7 @@ class LoginFragment : Fragment() {
                 override fun onFailure(call: Call<ResponseAuth>, t: Throwable) {
                     if (t is IOException) {
                         Toast.makeText(activity, R.string.check_network_connection, Toast.LENGTH_SHORT).show()
+                        Log.d(TAG, "Exception: ${t}")
                     }
                     else {
                         Toast.makeText(activity, "conversion issue! big problems :(", Toast.LENGTH_SHORT).show()

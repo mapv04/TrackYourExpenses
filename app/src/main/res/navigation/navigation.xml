@@ -53,6 +53,8 @@
               tools:layout="@layout/fragment_account_details">
         <action android:id="@+id/action_accountDetailsFragment_to_dashboardFragment"
                 app:destination="@id/dashboardFragment"/>
+        <argument android:name="account"
+                  app:argType="com.miguel.android.trackyourexpenses.data.database.entity.Accounts" />
     </fragment>
 
 </navigation>

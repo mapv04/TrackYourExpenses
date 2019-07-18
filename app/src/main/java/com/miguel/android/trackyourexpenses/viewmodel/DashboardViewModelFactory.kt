@@ -5,12 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.miguel.android.trackyourexpenses.data.repository.AccountRepository
 
 class DashboardViewModelFactory(
-    private val repository: AccountRepository,
-    val userId: Int
-): ViewModelProvider.NewInstanceFactory() {
+    private val repository: AccountRepository): ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return DashboardViewModel(repository, userId) as T
+        return DashboardViewModel(repository) as T
     }
 }

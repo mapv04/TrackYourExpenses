@@ -15,12 +15,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
 import com.miguel.android.trackyourexpenses.databinding.FragmentNewAccountBinding
-import com.miguel.android.trackyourexpenses.ui.activity.DashboardActivity
 import com.miguel.android.trackyourexpenses.common.InjectorUtils
 import com.miguel.android.trackyourexpenses.viewmodel.NewAccountViewModel
 import com.pes.androidmaterialcolorpickerdialog.ColorPicker
@@ -37,8 +36,7 @@ class NewAccountFragment : Fragment(){
 
     private lateinit var model: NewAccountViewModel
     private lateinit var  binding: FragmentNewAccountBinding
-    private var imageEncoded = ""
-    private var userId: Int? = null
+    private var imageLocation = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var gradientColor = 0
@@ -46,7 +44,6 @@ class NewAccountFragment : Fragment(){
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_new_account, container, false)
         binding.apply {
             this.lifecycleOwner = this@NewAccountFragment
-            this.viewmodel = model
         }
 
         binding.addImage.setOnClickListener {
@@ -70,33 +67,32 @@ class NewAccountFragment : Fragment(){
                 gradientColor = Color.argb(alpha, red, green, blue)
             }
 
-            model.accountName.observe(this, Observer {
-                val newAccount = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    Accounts(null,
-                        it,
-                        gradientColor,
-                        imageEncoded, LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString(),
-                        userId!!
-                    )
-                } else {
-                    Accounts(null,
-                        it,
-                        gradientColor,
-                        imageEncoded,
-                        SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time),
-                        userId!!
-                    )
+            binding.save.setOnClickListener {
+                binding.title.text.let{
+                    if (it.isNotBlank()){
+                        val newAccount = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            Accounts("",
+                                it.toString(),
+                                gradientColor,
+                                imageLocation, LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString(),
+                                ""
+                            )
+                        } else {
+                            Accounts("",
+                                it.toString(),
+                                gradientColor,
+                                imageLocation,
+                                SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time),
+                                ""
+                            )
+                        }
+                        model.addNewAccount(newAccount)
+
+                        view?.findNavController()?.navigate(R.id.action_newAccountFragment_to_dashboardFragment)
+                    }
                 }
-                model.addNewAccount(newAccount)
+            }
 
-                Log.i(TAG, "New account created")
-
-                // Return to Dashboard
-                val intent = Intent(activity, DashboardActivity::class.java)
-                intent.putExtra(DashboardFragment.EXTRA_USER_ID, userId!!)
-                startActivity(intent)
-                activity?.finish()
-            })
         }
 
         return binding.root
@@ -104,7 +100,6 @@ class NewAccountFragment : Fragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        userId = activity?.intent?.extras?.getInt(EXTRA_USER_ID)
         val factory = InjectorUtils.provideNewAccountViewModelFactory(requireContext())
         model = activity?.run{
             ViewModelProviders.of(this, factory).get(NewAccountViewModel::class.java)
@@ -120,10 +115,8 @@ class NewAccountFragment : Fragment(){
             try{
                 val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, uri)
                 addImage.setImageBitmap(bitmap)
-                val baos = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                val byte = baos.toByteArray()
-                imageEncoded = Base64.encodeToString(byte, Base64.DEFAULT)
+                imageLocation = uri.toString()
+
             }catch(e: IOException){
                 Log.e(TAG, "Error onActivityResult: ",e)
             }

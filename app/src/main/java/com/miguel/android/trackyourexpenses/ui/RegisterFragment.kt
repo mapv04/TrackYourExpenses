@@ -50,8 +50,8 @@ class RegisterFragment: Fragment() {
 
                        override fun onResponse(call: Call<ResponseAuth>, response: Response<ResponseAuth>) {
                            if(response.isSuccessful){
-                               SharedPreferencesManager.setSomeStringValue(PREF_NAME, response.body()?.name.toString() + " " + response.body()?.lastname.toString(), activity!!.applicationContext)
-                               SharedPreferencesManager.setSomeStringValue(PREF_USERNAME, response.body()?.username.toString(), activity!!.applicationContext)
+                               SharedPreferencesManager.setSomeStringValue(PREF_NAME, response.body()?.name.toString() + " " + response.body()?.lastname.toString())
+                               SharedPreferencesManager.setSomeStringValue(PREF_USERNAME, response.body()?.username.toString())
                                Toast.makeText(activity, R.string.sign_up_success, Toast.LENGTH_SHORT)
                                model.onUserCreated()
                                view?.findNavController()?.navigate(R.id.action_registerFragment_to_loginFragment)

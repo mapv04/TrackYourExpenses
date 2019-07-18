@@ -10,7 +10,7 @@ import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
 @Dao
 interface AccountsDao {
 
-    @Query("SELECT * FROM accounts WHERE user_id = :id")
+    @Query("SELECT * FROM accounts WHERE userId = :id")
     fun getAllAccounts(id: Int): LiveData<List<Accounts>>
 
     @Insert

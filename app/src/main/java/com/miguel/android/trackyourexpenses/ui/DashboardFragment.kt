@@ -20,9 +20,9 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miguel.android.trackyourexpenses.R
-import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
 import com.miguel.android.trackyourexpenses.common.InjectorUtils
 import com.miguel.android.trackyourexpenses.data.api.response.Account
+import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
 import com.miguel.android.trackyourexpenses.viewmodel.DashboardViewModel
 import kotlinx.android.synthetic.main.fragment_account_list.view.*
 
@@ -33,16 +33,16 @@ class DashboardFragment : Fragment() {
     private var userId: Int? = null
     private var mDeleteCallBack: onDeleteAccountListener? = null
     private var mCallBack: Callbacks? = null
-    private var listAccounts: List<Account> = emptyList()
+    private var listAccounts: List<Accounts> = emptyList()
 
     /**
      * Required interface for hosting activities
      */
     interface Callbacks{
-        fun onAccountSelected(account: Account?, view: View?)
+        fun onAccountSelected(account: Accounts, view: View?)
     }
     interface onDeleteAccountListener{
-        fun onAccountIdSelected(account: Account, fragment: DashboardFragment)
+        fun onAccountIdSelected(account: Accounts, fragment: DashboardFragment)
     }
 
     override fun onAttach(context: Context?) {
@@ -72,7 +72,12 @@ class DashboardFragment : Fragment() {
         )
 
         model.getAllAccounts().observe(this, Observer {
-            accountAdapter.setNewAccounts(it)
+            val accountList: List<Accounts> = it.map{ account ->
+                Accounts(account.id!!, account.name!!, account.color!!,
+                    account.imageLocation!!, account.lastUpdate!!, account.userId!!)
+            }
+
+            accountAdapter.setNewAccounts(accountList)
         })
 
         setAccountRecyclerViewItemTouchListener(view)
@@ -85,7 +90,7 @@ class DashboardFragment : Fragment() {
         userId = activity?.intent?.extras?.getInt(EXTRA_USER_ID)
         Log.i(TAG, "Dashboard for user: $userId")
 
-        val factory = InjectorUtils.provideDashboardViewModelFactory(requireContext(), userId!!)
+        val factory = InjectorUtils.provideDashboardViewModelFactory(requireContext())
         model = activity?.run {
             ViewModelProviders.of(this, factory).get(DashboardViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
@@ -136,7 +141,7 @@ class DashboardFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(v.mRecyclerView)
     }
 
-    fun deleteAccount(account: Account){
+    fun deleteAccount(account: Accounts){
         model.deleteAccount(account)
     }
 
@@ -145,8 +150,8 @@ class DashboardFragment : Fragment() {
      * ACCOUNT ADAPTER
      */
 
-    private inner class AccountAdapter(listAccounts: List<Account>) : RecyclerView.Adapter<AccountAdapter.AccountHolder>() {
-        var list: List<Account> = listAccounts
+    private inner class AccountAdapter(listAccounts: List<Accounts>) : RecyclerView.Adapter<AccountAdapter.AccountHolder>() {
+        var list: List<Accounts> = listAccounts
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AccountHolder {
             val inflater = LayoutInflater.from(parent.context)
@@ -156,11 +161,11 @@ class DashboardFragment : Fragment() {
         override fun getItemCount(): Int = list.size
 
         override fun onBindViewHolder(holder: AccountHolder, position: Int) {
-            val account: Account = list[position]
+            val account: Accounts = list[position]
             holder.bind(account)
         }
 
-        fun setNewAccounts(newAccounts: List<Account>){
+        fun setNewAccounts(newAccounts: List<Accounts>){
             list = newAccounts
             notifyDataSetChanged()
         }
@@ -174,7 +179,7 @@ class DashboardFragment : Fragment() {
             private var mTitle: TextView? = null
             private var mLastUpdate: TextView? = null
             private var mCardView: CardView? = null
-            private var mAccount: Account? = null
+            private lateinit var mAccount: Accounts
 
             init {
                 itemView.setOnClickListener(this)
@@ -183,11 +188,11 @@ class DashboardFragment : Fragment() {
                 mCardView = itemView.findViewById(R.id.carview)
             }
 
-            fun bind(account: Account){
+            fun bind(account: Accounts){
                 mAccount = account
-                mCardView?.setCardBackgroundColor(mAccount?.color!!)
-                mTitle?.text = mAccount?.name
-                mLastUpdate?.text = mAccount?.lastUpdate
+                mCardView?.setCardBackgroundColor(mAccount.color ?: Color.WHITE)
+                mTitle?.text = mAccount.name
+                mLastUpdate?.text = mAccount.lastUpdate
             }
 
             override fun onClick(v: View?) {
