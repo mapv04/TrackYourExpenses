@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.miguel.android.trackyourexpenses.data.api.request.RequestAccount
 import com.miguel.android.trackyourexpenses.data.api.response.Account
+import com.miguel.android.trackyourexpenses.data.api.response.AccountDeleted
 import com.miguel.android.trackyourexpenses.data.api.retrofit.AuthExpensesService
 import com.miguel.android.trackyourexpenses.data.api.retrofit.AuthExpensesClient
 import com.miguel.android.trackyourexpenses.data.database.dao.AccountsDao
@@ -13,6 +14,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.IOException
 
 class AccountRepository(private val accountDao: AccountsDao) {
 
@@ -89,11 +91,35 @@ class AccountRepository(private val accountDao: AccountsDao) {
         return allAccounts!!
     }
 
-    suspend fun deleteAccount(account: Accounts){
+    fun deleteAccount(account: Accounts){
         val requestAccount = RequestAccount(account)
-        withContext(Dispatchers.IO) {
-            authExpenseService.deleteAccount(requestAccount)
-        }
+        val call = authExpenseService.deleteAccount(requestAccount)
+        call.enqueue(object: Callback<AccountDeleted>{
+            override fun onResponse(call: Call<AccountDeleted>, response: Response<AccountDeleted>) {
+                if(response.isSuccessful){
+                    Log.i(TAG, "${response.body()?.message} ID: ${response.body()?.id} UserID: ${response.body()?.userId}")
+                    val list = mutableListOf<Account>()
+                    allAccounts?.value?.forEach{
+                        if (it.id != response.body()?.id) {
+                            list.add(it)
+                        }
+                    }
+                    allAccounts?.value = list
+                }
+                else{
+                    Log.d(TAG, "Failure request")
+                }
+            }
+
+            override fun onFailure(call: Call<AccountDeleted>, t: Throwable) {
+                if (t is IOException) {
+                    Log.d(TAG, "Exception: ${t}")
+                }
+                else {
+                    Log.e(TAG, "Connection error")
+                }
+            }
+        })
     }
 
     fun createNewAccount(account: Accounts) {
@@ -115,7 +141,12 @@ class AccountRepository(private val accountDao: AccountsDao) {
             }
 
             override fun onFailure(call: Call<Account>, t: Throwable) {
-                Log.e(TAG, "Connection error")
+                if (t is IOException) {
+                    Log.d(TAG, "Exception: ${t}")
+                }
+                else {
+                   Log.e(TAG, "Connection error" )
+                }
             }
         })
     }

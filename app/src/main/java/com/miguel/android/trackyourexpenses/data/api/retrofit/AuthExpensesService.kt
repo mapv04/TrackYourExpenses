@@ -2,11 +2,9 @@ package com.miguel.android.trackyourexpenses.data.api.retrofit
 
 import com.miguel.android.trackyourexpenses.data.api.request.RequestAccount
 import com.miguel.android.trackyourexpenses.data.api.response.Account
+import com.miguel.android.trackyourexpenses.data.api.response.AccountDeleted
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface AuthExpensesService {
     @GET("api/user/accounts/allAccounts")
@@ -15,6 +13,6 @@ interface AuthExpensesService {
     @POST("api/user/accounts/newAccount")
     fun createNewAccount(@Body requestAccounts: RequestAccount): Call<Account>
 
-    @DELETE("api/user/accounts/deleteAccount")
-    fun deleteAccount(@Body requestAccount: RequestAccount)
+    @HTTP(method="DELETE", path = "api/user/accounts/deleteAccount", hasBody = true)
+    fun deleteAccount(@Body requestAccount: RequestAccount): Call<AccountDeleted>
 }

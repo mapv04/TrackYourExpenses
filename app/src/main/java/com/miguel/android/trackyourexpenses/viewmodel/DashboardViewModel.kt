@@ -21,9 +21,8 @@ class DashboardViewModel(
 
     fun getAllAccounts() = allAccounts
 
-    fun deleteAccount(account: Accounts) = viewModelScope.launch(Dispatchers.IO) {
-        repository.deleteAccount(account)
-    }
+    fun deleteAccount(account: Accounts) = repository.deleteAccount(account)
+
 
 
 }

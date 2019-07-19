@@ -13,8 +13,7 @@
 
         <action android:id="@+id/action_loginFragment_to_dashboardFragment"
                 app:destination="@id/dashboardFragment"
-                app:popUpTo="@layout/fragment_login"
-                app:popUpToInclusive="true"/>
+                app:popUpTo="@layout/fragment_login"/>
     </fragment>
 
     <fragment
