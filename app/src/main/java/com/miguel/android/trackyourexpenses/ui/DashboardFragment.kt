@@ -21,9 +21,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.common.InjectorUtils
-import com.miguel.android.trackyourexpenses.data.api.response.Account
 import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
-import com.miguel.android.trackyourexpenses.viewmodel.DashboardViewModel
+import com.miguel.android.trackyourexpenses.ui.viewmodel.DashboardViewModel
 import kotlinx.android.synthetic.main.fragment_account_list.view.*
 
 class DashboardFragment : Fragment() {

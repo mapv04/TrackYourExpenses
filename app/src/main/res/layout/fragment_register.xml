@@ -2,7 +2,7 @@
 <layout>
     <data>
         <variable name="viewmodel"
-                  type="com.miguel.android.trackyourexpenses.viewmodel.RegisterViewModel" />
+                  type="com.miguel.android.trackyourexpenses.ui.viewmodel.RegisterViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout

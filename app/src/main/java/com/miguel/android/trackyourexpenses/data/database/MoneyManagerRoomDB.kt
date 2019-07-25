@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.miguel.android.trackyourexpenses.data.database.dao.AccountActivityDao
 import com.miguel.android.trackyourexpenses.data.database.dao.AccountsDao
 import com.miguel.android.trackyourexpenses.data.database.entity.User
 import com.miguel.android.trackyourexpenses.data.database.dao.UserDao

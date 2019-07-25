@@ -1,13 +1,11 @@
 package com.miguel.android.trackyourexpenses.common
 
 import android.content.Context
-import com.miguel.android.trackyourexpenses.viewmodel.LoginViewModelFactory
-import com.miguel.android.trackyourexpenses.viewmodel.RegisterViewModelFactory
 import com.miguel.android.trackyourexpenses.data.database.MoneyManagerRoomDB
+import com.miguel.android.trackyourexpenses.data.repository.AccountActivityRepository
 import com.miguel.android.trackyourexpenses.data.repository.AccountRepository
 import com.miguel.android.trackyourexpenses.data.repository.UserRepository
-import com.miguel.android.trackyourexpenses.viewmodel.DashboardViewModelFactory
-import com.miguel.android.trackyourexpenses.viewmodel.NewAccountViewModelFactory
+import com.miguel.android.trackyourexpenses.ui.viewmodel.*
 
 object InjectorUtils{
 
@@ -21,6 +19,10 @@ object InjectorUtils{
         return AccountRepository.getInstance(
             MoneyManagerRoomDB.getDatabase(context.applicationContext).accountDao()
         )
+    }
+
+    private fun getAccountActivityRepository(): AccountActivityRepository{
+        return AccountActivityRepository.getInstance()
     }
 
     fun provideLoginViewModelFactory(context: Context): LoginViewModelFactory {
@@ -41,5 +43,10 @@ object InjectorUtils{
     fun provideDashboardViewModelFactory(context: Context): DashboardViewModelFactory{
         val repository = getAccountRepository(context)
         return DashboardViewModelFactory(repository)
+    }
+
+    fun provideIncomesViewModelFactory(accountId: String): IncomesViewModelFactory {
+        val repository = getAccountActivityRepository()
+        return IncomesViewModelFactory(repository, accountId)
     }
 }

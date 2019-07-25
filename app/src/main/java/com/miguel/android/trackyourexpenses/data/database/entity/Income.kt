@@ -12,9 +12,9 @@ import androidx.room.PrimaryKey
 )))
 data class Income(
     @PrimaryKey(autoGenerate = true)
-    val id: Int? = null,
+    val id: String? = null,
     val name: String,
-    val store: String,
+    val date: String,
     val total: Float,
-    @ColumnInfo(name = "account_id") val accountId: Int
+    @ColumnInfo(name = "account_id") val accountId: String
 )

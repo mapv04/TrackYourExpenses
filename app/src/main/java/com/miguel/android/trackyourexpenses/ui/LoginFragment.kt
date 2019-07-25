@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import com.miguel.android.trackyourexpenses.viewmodel.LoginViewModel
+import com.miguel.android.trackyourexpenses.ui.viewmodel.LoginViewModel
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.data.api.request.RequestLogin
 import com.miguel.android.trackyourexpenses.data.api.response.ResponseAuth

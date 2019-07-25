@@ -2,13 +2,11 @@ package com.miguel.android.trackyourexpenses.ui
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,10 +19,9 @@ import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
 import com.miguel.android.trackyourexpenses.databinding.FragmentNewAccountBinding
 import com.miguel.android.trackyourexpenses.common.InjectorUtils
-import com.miguel.android.trackyourexpenses.viewmodel.NewAccountViewModel
+import com.miguel.android.trackyourexpenses.ui.viewmodel.NewAccountViewModel
 import com.pes.androidmaterialcolorpickerdialog.ColorPicker
 import kotlinx.android.synthetic.main.fragment_new_account.*
-import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.lang.Exception
 import java.text.SimpleDateFormat

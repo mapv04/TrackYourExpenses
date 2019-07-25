@@ -2,7 +2,7 @@
 <layout>
     <data>
         <variable name="viewmodel"
-                  type="com.miguel.android.trackyourexpenses.viewmodel.LoginViewModel"/>
+                  type="com.miguel.android.trackyourexpenses.ui.viewmodel.LoginViewModel"/>
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"

@@ -9,8 +9,6 @@ import com.miguel.android.trackyourexpenses.data.api.retrofit.AuthExpensesServic
 import com.miguel.android.trackyourexpenses.data.api.retrofit.AuthExpensesClient
 import com.miguel.android.trackyourexpenses.data.database.dao.AccountsDao
 import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,48 +25,6 @@ class AccountRepository(private val accountDao: AccountsDao) {
         allAccounts = getAllAccounts()
     }
 
-    /*suspend fun addNewAccount(account: Account) =
-        withContext(Dispatchers.IO) {
-            accountDao.addNewAccount(account)
-        }
-
-
-    fun getAllAcoountsById(id: Int) : LiveData<List<Account>> = GetAccountsAsyncTask(accountDao).execute(id).get()
-
-    @SuppressLint("CheckResult")
-    fun deleteAccountById(account: Account) {
-        Observable.just(account)
-            .observeOn(Schedulers.io())
-            .subscribeOn(AndroidSchedulers.mainThread())
-            .subscribe({ account ->
-                accountDao.deleteAccount(account)
-            }, { error -> Log.e(TAG, "Error deleting the account: ", error) })
-    }
-
-
-
-
-    companion object{
-        private const val TAG = "AccountRepository"
-
-        @Volatile
-        private var instance: AccountRepository? = null
-
-        fun getInstance(accountDao: AccountsDao) =
-            instance ?: synchronized(this){
-                instance ?: AccountRepository(accountDao).also{ instance = it}
-            }
-    }
-
-    class GetAccountsAsyncTask(dao: AccountsDao): AsyncTask<Int?, Void, LiveData<List<Accounts>>>(){
-        private val accountDao = dao
-
-        override fun doInBackground(vararg userId: Int?): LiveData<List<Accounts>> {
-            return accountDao.getAllAccounts(userId[0]!!)
-        }
-    }
-
-*/
 
     fun getAllAccounts(): MutableLiveData<List<Account>>{
         allAccounts = allAccounts ?: MutableLiveData()
@@ -85,15 +41,14 @@ class AccountRepository(private val accountDao: AccountsDao) {
             }
 
             override fun onFailure(call: Call<List<Account>>, t: Throwable) {
-                Log.e(TAG, "Connection error")
+                Log.e(TAG, "Connection error: $t")
             }
         })
         return allAccounts!!
     }
 
     fun deleteAccount(account: Accounts){
-        val requestAccount = RequestAccount(account)
-        val call = authExpenseService.deleteAccount(requestAccount)
+        val call = authExpenseService.deleteAccount(account.id)
         call.enqueue(object: Callback<AccountDeleted>{
             override fun onResponse(call: Call<AccountDeleted>, response: Response<AccountDeleted>) {
                 if(response.isSuccessful){
