@@ -55,8 +55,8 @@ class RecyclerViewExpenses(val accountId: String): Fragment() {
         return view
     }
 
-    private inner class ExpenseAdapter(listIncomes: List<Expense>): RecyclerView.Adapter<ExpenseAdapter.ExpenseHolder>(){
-        var list : List<Expense> = listIncomes
+    private inner class ExpenseAdapter(listExpenses: List<Expense>): RecyclerView.Adapter<ExpenseAdapter.ExpenseHolder>(){
+        var list : List<Expense> = listExpenses
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpenseHolder {
             val inflater = LayoutInflater.from(parent.context)

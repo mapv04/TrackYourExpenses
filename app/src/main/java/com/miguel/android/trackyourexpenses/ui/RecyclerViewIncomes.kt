@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miguel.android.trackyourexpenses.R
@@ -42,7 +43,7 @@ class RecyclerViewIncomes(private val accountId: String): Fragment() {
         }
 
         view.fab.setOnClickListener{
-
+            it.findNavController().navigate(R.id.action_accountDetailsFragment_to_newIncomeFragment)
         }
 
         model.getAllIncomes().observe(this, Observer {

@@ -54,6 +54,12 @@
                 app:destination="@id/dashboardFragment"/>
         <argument android:name="account"
                   app:argType="com.miguel.android.trackyourexpenses.data.database.entity.Accounts" />
+        <action android:id="@+id/action_accountDetailsFragment_to_newIncomeFragment"
+                app:destination="@id/newIncomeFragment"/>
     </fragment>
+    <fragment android:id="@+id/newIncomeFragment"
+              android:name="com.miguel.android.trackyourexpenses.ui.NewIncomeFragment"
+              android:label="NewIncomeFragment"
+    tools:layout="@layout/fragment_new_income"/>
 
 </navigation>
