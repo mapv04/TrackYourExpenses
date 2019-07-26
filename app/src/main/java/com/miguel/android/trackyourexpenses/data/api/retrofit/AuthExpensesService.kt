@@ -27,6 +27,6 @@ interface AuthExpensesService {
     @POST("api/user/accounts/expenses/createNewExpense")
     fun createNewExpense(@Body requestExpense: RequestMov): Call<Movements>
 
-    @GET("api/user/accounts/expenses/allExpenses")
-    fun getAllExpenses(): Call<List<Movements>>
+    @GET("api/user/accounts/expenses/allExpenses/{id}")
+    fun getAllExpenses(@Path("id") accountId: String): Call<List<Movements>>
 }

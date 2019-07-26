@@ -78,15 +78,15 @@ class RecyclerViewIncomes(private val accountId: String): Fragment() {
         }
 
 
-        private inner class IncomeHolder(inflater: LayoutInflater, parent: ViewGroup): RecyclerView.ViewHolder(inflater.inflate(R.layout.income_item, parent, false)){
+        private inner class IncomeHolder(inflater: LayoutInflater, parent: ViewGroup): RecyclerView.ViewHolder(inflater.inflate(R.layout.movement_item, parent, false)){
             private var mIncomeName: TextView? = null
             private var mIncomeDate: TextView? = null
             private var mIncomeTotal: TextView? = null
 
             init{
-                mIncomeName = itemView.findViewById(R.id.incomeName)
-                mIncomeDate = itemView.findViewById(R.id.incomeDate)
-                mIncomeTotal = itemView.findViewById(R.id.incomeTotal)
+                mIncomeName = itemView.findViewById(R.id.movementName)
+                mIncomeDate = itemView.findViewById(R.id.movementDate)
+                mIncomeTotal = itemView.findViewById(R.id.movementTotal)
             }
 
             fun bind(income: Income){

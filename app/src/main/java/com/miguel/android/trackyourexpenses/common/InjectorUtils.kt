@@ -49,4 +49,9 @@ object InjectorUtils{
         val repository = getAccountActivityRepository()
         return IncomesViewModelFactory(repository, accountId)
     }
+
+    fun provideExpensesViewModelFactory(accountId: String): ExpensesViewModelFactory {
+        val repository = getAccountActivityRepository()
+        return ExpensesViewModelFactory(repository, accountId)
+    }
 }

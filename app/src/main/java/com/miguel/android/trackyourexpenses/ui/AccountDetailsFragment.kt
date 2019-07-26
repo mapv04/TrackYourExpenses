@@ -26,9 +26,10 @@ class AccountDetailsFragment: Fragment() {
         }
 
         view.expenseTextView.setOnClickListener {
-            /**
-             * FRAGMENT MANAGER
-             */
+           val fragment = RecyclerViewExpenses(args.account.id)
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.fragmentAccountActivityContainer, fragment)
+            transaction?.commit()
         }
         return view
 

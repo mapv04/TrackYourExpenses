@@ -2,6 +2,7 @@ package com.miguel.android.trackyourexpenses.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.miguel.android.trackyourexpenses.data.repository.AccountActivityRepository
 import com.miguel.android.trackyourexpenses.data.repository.AccountRepository
 import com.miguel.android.trackyourexpenses.data.repository.UserRepository
@@ -53,5 +54,16 @@ class DashboardViewModelFactory(
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return DashboardViewModel(repository) as T
+    }
+
+}
+
+class ExpensesViewModelFactory(
+    private val repository: AccountActivityRepository,
+    private val accountId: String
+): ViewModelProvider.NewInstanceFactory(){
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return ExpensesViewModel(repository, accountId) as T
     }
 }

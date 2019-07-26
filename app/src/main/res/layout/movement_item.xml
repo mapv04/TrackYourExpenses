@@ -11,25 +11,22 @@
         android:layout_height="match_parent">
 
     <TextView
-            android:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/incomeName" android:layout_marginTop="8dp"
+            android:id="@+id/movementName" android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"/>
     <TextView
-            android:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/incomeDate" android:layout_marginTop="44dp"
-            app:layout_constraintTop_toBottomOf="@+id/incomeName" app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/movementDate" android:layout_marginTop="44dp"
+            app:layout_constraintTop_toBottomOf="@+id/movementName" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"/>
     <TextView
-            android:text="TextView"
             android:layout_width="57dp"
             android:layout_height="17dp"
-            android:id="@+id/incomeTotal" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintTop_toTopOf="@+id/incomeDate"
-            app:layout_constraintBottom_toBottomOf="@+id/incomeDate"/>
+            android:id="@+id/movementTotal" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toTopOf="@+id/movementDate"
+            app:layout_constraintBottom_toBottomOf="@+id/movementDate"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

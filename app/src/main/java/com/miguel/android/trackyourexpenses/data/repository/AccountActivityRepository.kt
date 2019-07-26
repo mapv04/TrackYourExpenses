@@ -14,6 +14,7 @@ import retrofit2.Response
 class AccountActivityRepository{
 
     private var allIncomes: MutableLiveData<List<Movements>>? = MutableLiveData()
+    private var allExpenses: MutableLiveData<List<Movements>>? = MutableLiveData()
     private val authExpenseService: AuthExpensesService
     private val authExpensesClient: AuthExpensesClient = AuthExpensesClient.instance
 
@@ -35,10 +36,30 @@ class AccountActivityRepository{
             }
 
             override fun onFailure(call: Call<List<Movements>>, t: Throwable) {
-                Log.e(TAG, "Connection error")
+                Log.e(TAG, "Connection error: $t")
             }
         })
         return allIncomes!!
+    }
+
+    fun getAllExpenses(): MutableLiveData<List<Movements>>{
+        val call: Call<List<Movements>> = authExpenseService.getAllExpenses(accountId)
+        call.enqueue(object: Callback<List<Movements>>{
+            override fun onResponse(call: Call<List<Movements>>, response: Response<List<Movements>>) {
+                if(response.isSuccessful){
+                    allExpenses?.value = response.body()
+                }
+                else{
+                    Log.i(TAG, "Something went wrong")
+                }
+            }
+
+            override fun onFailure(call: Call<List<Movements>>, t: Throwable) {
+                Log.e(TAG, "Connection error: $t")
+            }
+        })
+
+        return allExpenses!!
     }
 
     companion object{
