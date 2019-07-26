@@ -14,7 +14,8 @@ class NewIncomeFragment: Fragment() {
         val view = inflater.inflate(R.layout.fragment_new_income, container, false)
 
         view.addButton.setOnClickListener{
-
+            val fragment = NewMovementDialog()
+            fragment.show(fragmentManager, null)
         }
 
         return view
