@@ -2,6 +2,7 @@ package com.miguel.android.trackyourexpenses.data.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.miguel.android.trackyourexpenses.data.Movs
 import com.miguel.android.trackyourexpenses.data.api.request.RequestMov
 import com.miguel.android.trackyourexpenses.data.api.response.Movements
 import com.miguel.android.trackyourexpenses.data.api.retrofit.AuthExpensesClient
@@ -60,6 +61,14 @@ class AccountActivityRepository{
         })
 
         return allExpenses!!
+    }
+
+    fun createNewIncome(movs: Movs): Movements {
+
+    }
+
+    fun createNewExpense(movs: Movs): Movements {
+
     }
 
     companion object{

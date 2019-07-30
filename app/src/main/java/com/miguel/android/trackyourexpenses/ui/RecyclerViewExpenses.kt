@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miguel.android.trackyourexpenses.R
@@ -40,8 +41,12 @@ class RecyclerViewExpenses(val accountId: String): Fragment() {
             adapter = expenseAdapter
         }
 
+        /**
+         * Add new expense
+         */
         view.fab.setOnClickListener{
-
+            val action = AccountDetailsFragmentDirections.actionAccountDetailsFragmentToNewMovementFragment("expense")
+            it.findNavController().navigate(action)
         }
 
         model.getAllExpenses().observe(this, Observer {

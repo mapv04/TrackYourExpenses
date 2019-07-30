@@ -8,13 +8,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.miguel.android.trackyourexpenses.R
+import com.miguel.android.trackyourexpenses.data.ItemMov
+import com.miguel.android.trackyourexpenses.data.Movs
 import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
 import com.miguel.android.trackyourexpenses.databinding.ActivityFragmentBinding
-import com.miguel.android.trackyourexpenses.ui.DashboardFragment
-import com.miguel.android.trackyourexpenses.ui.DashboardFragmentDirections
-import com.miguel.android.trackyourexpenses.ui.LoginFragment
+import com.miguel.android.trackyourexpenses.ui.*
 
-class MainActivity : AppCompatActivity(), DashboardFragment.Callbacks, DashboardFragment.onDeleteAccountListener {
+class MainActivity : AppCompatActivity(), DashboardFragment.Callbacks, DashboardFragment.OnDeleteAccountListener, NewMovementDialog.OnItemListListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +40,10 @@ class MainActivity : AppCompatActivity(), DashboardFragment.Callbacks, Dashboard
             val action = DashboardFragmentDirections.actionDashboardFragmentToAccountDetailsFragment(account)
             it.findNavController().navigate(action)
         }
+    }
+
+    override fun onItemListCreated(item: ItemMov) {
+        NewMovementFragment.itemList.add(item)
     }
 
 }

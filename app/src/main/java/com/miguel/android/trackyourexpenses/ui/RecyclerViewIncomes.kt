@@ -42,8 +42,12 @@ class RecyclerViewIncomes(private val accountId: String): Fragment() {
             adapter = incomeAdapter
         }
 
+        /**
+         * Add new Income
+         */
         view.fab.setOnClickListener{
-            it.findNavController().navigate(R.id.action_accountDetailsFragment_to_newIncomeFragment)
+            val action = AccountDetailsFragmentDirections.actionAccountDetailsFragmentToNewMovementFragment("income")
+            it.findNavController().navigate(action)
         }
 
         model.getAllIncomes().observe(this, Observer {

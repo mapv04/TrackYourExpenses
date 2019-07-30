@@ -30,7 +30,7 @@ class DashboardFragment : Fragment() {
     private lateinit var model: DashboardViewModel
     private lateinit var accountAdapter: AccountAdapter
     private var userId: Int? = null
-    private var mDeleteCallBack: onDeleteAccountListener? = null
+    private var mDeleteCallBack: OnDeleteAccountListener? = null
     private var mCallBack: Callbacks? = null
     private var listAccounts: List<Accounts> = emptyList()
 
@@ -40,14 +40,14 @@ class DashboardFragment : Fragment() {
     interface Callbacks{
         fun onAccountSelected(account: Accounts, view: View?)
     }
-    interface onDeleteAccountListener{
+    interface OnDeleteAccountListener{
         fun onAccountIdSelected(account: Accounts, fragment: DashboardFragment)
     }
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        mCallBack = context as Callbacks?
-        mDeleteCallBack = context as onDeleteAccountListener?
+        mCallBack = context as Callbacks
+        mDeleteCallBack = context as OnDeleteAccountListener
     }
 
     override fun onDetach() {
