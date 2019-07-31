@@ -1,6 +1,7 @@
 package com.miguel.android.trackyourexpenses.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,18 +18,18 @@ import com.miguel.android.trackyourexpenses.data.database.entity.Income
 import com.miguel.android.trackyourexpenses.ui.viewmodel.IncomesViewModel
 import kotlinx.android.synthetic.main.fragment_incomes_list.view.*
 
-class RecyclerViewIncomes(private val accountId: String): Fragment() {
+class RecyclerViewIncomes: Fragment() {
 
     private lateinit var model: IncomesViewModel
-    private lateinit var incomeAdapter: RecyclerViewIncomes.IncomeAdapter
+    private lateinit var incomeAdapter: IncomeAdapter
     private var listIncomes = emptyList<Income>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val factory = InjectorUtils.provideIncomesViewModelFactory(accountId)
+
         model = activity?.run {
-            ViewModelProviders.of(this, factory).get(IncomesViewModel::class.java)
+            ViewModelProviders.of(this).get(IncomesViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
     }
 
@@ -46,14 +47,14 @@ class RecyclerViewIncomes(private val accountId: String): Fragment() {
          * Add new Income
          */
         view.fab.setOnClickListener{
-            val action = AccountDetailsFragmentDirections.actionAccountDetailsFragmentToNewMovementFragment("income")
+            val action = AccountDetailsFragmentDirections.actionAccountDetailsFragmentToNewMovementFragment("income", AccountDetailsFragment.account)
             it.findNavController().navigate(action)
         }
 
         model.getAllIncomes().observe(this, Observer {
             val incomeList: List<Income> = it.map { income ->
-                Income(income.id, income.name!!, income.date!!,
-                    0.0F, income.accountId!! )
+                Income(income.id, income.name!!, income.description!!, income.date!!,
+                    income.total!!.toFloat(), income.accountId!! )
             }
             incomeAdapter.setNewIncomes(incomeList)
         })
@@ -101,4 +102,5 @@ class RecyclerViewIncomes(private val accountId: String): Fragment() {
             }
         }
     }
+
 }

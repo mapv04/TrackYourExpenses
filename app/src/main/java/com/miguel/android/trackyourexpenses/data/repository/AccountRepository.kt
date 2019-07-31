@@ -12,7 +12,6 @@ import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.IOException
 
 class AccountRepository(private val accountDao: AccountsDao) {
 
@@ -41,7 +40,7 @@ class AccountRepository(private val accountDao: AccountsDao) {
             }
 
             override fun onFailure(call: Call<List<Account>>, t: Throwable) {
-                Log.e(TAG, "Connection error: $t")
+                Log.e(TAG, "Network failure: $t")
             }
         })
         return allAccounts!!
@@ -67,12 +66,7 @@ class AccountRepository(private val accountDao: AccountsDao) {
             }
 
             override fun onFailure(call: Call<AccountDeleted>, t: Throwable) {
-                if (t is IOException) {
-                    Log.d(TAG, "Exception: ${t}")
-                }
-                else {
-                    Log.e(TAG, "Connection error")
-                }
+                Log.e(TAG, "Network failure: $t")
             }
         })
     }
@@ -88,7 +82,7 @@ class AccountRepository(private val accountDao: AccountsDao) {
                         list.add(it)
                     }
 
-                    allAccounts?.value = list.toList()
+                    allAccounts?.value = list
                 }
                 else{
                     Log.d(TAG, "Failure request")
@@ -96,12 +90,7 @@ class AccountRepository(private val accountDao: AccountsDao) {
             }
 
             override fun onFailure(call: Call<Account>, t: Throwable) {
-                if (t is IOException) {
-                    Log.d(TAG, "Exception: ${t}")
-                }
-                else {
-                   Log.e(TAG, "Connection error" )
-                }
+                Log.e(TAG, "Network failure: $t")
             }
         })
     }

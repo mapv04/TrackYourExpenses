@@ -16,6 +16,7 @@ data class Expense(
     @PrimaryKey(autoGenerate = true)
     val id: String? = null,
     val name: String,
+    val description: String,
     val date: String,
     val total: Float,
     @ColumnInfo(name = "account_id") val accountId: String

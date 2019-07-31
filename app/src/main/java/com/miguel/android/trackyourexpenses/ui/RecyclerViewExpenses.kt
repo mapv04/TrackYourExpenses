@@ -17,7 +17,7 @@ import com.miguel.android.trackyourexpenses.data.database.entity.Expense
 import com.miguel.android.trackyourexpenses.ui.viewmodel.ExpensesViewModel
 import kotlinx.android.synthetic.main.fragment_expenses_list.view.*
 
-class RecyclerViewExpenses(val accountId: String): Fragment() {
+class RecyclerViewExpenses: Fragment() {
 
     private lateinit var model: ExpensesViewModel
     private lateinit var expenseAdapter: ExpenseAdapter
@@ -25,9 +25,9 @@ class RecyclerViewExpenses(val accountId: String): Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val factory = InjectorUtils.provideExpensesViewModelFactory(accountId)
+
         model = activity?.run {
-            ViewModelProviders.of(this, factory).get(ExpensesViewModel::class.java)
+            ViewModelProviders.of(this).get(ExpensesViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
     }
 
@@ -45,14 +45,14 @@ class RecyclerViewExpenses(val accountId: String): Fragment() {
          * Add new expense
          */
         view.fab.setOnClickListener{
-            val action = AccountDetailsFragmentDirections.actionAccountDetailsFragmentToNewMovementFragment("expense")
+            val action = AccountDetailsFragmentDirections.actionAccountDetailsFragmentToNewMovementFragment("expense", AccountDetailsFragment.account)
             it.findNavController().navigate(action)
         }
 
         model.getAllExpenses().observe(this, Observer {
             val expenseList: List<Expense> = it.map { expense ->
-                Expense(expense.id, expense.name!!, expense.date!!,
-                    0.0F, expense.accountId!! )
+                Expense(expense.id, expense.name!!, expense.description!!, expense.date!!,
+                    expense.total!!.toFloat(), expense.accountId!! )
             }
             expenseAdapter.setNewExpenses(expenseList)
         })

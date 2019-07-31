@@ -5,17 +5,18 @@ import androidx.lifecycle.ViewModel
 import com.miguel.android.trackyourexpenses.data.api.response.Movements
 import com.miguel.android.trackyourexpenses.data.repository.AccountActivityRepository
 
-class ExpensesViewModel(
-    repository: AccountActivityRepository,
-    accountId: String
-): ViewModel() {
+class ExpensesViewModel: ViewModel() {
 
-    private val allExpenses: LiveData<List<Movements>>
+    private val repository = AccountActivityRepository()
+
+    private var allExpenses: LiveData<List<Movements>>
 
     init{
-        AccountActivityRepository.accountId = accountId
         allExpenses = repository.getAllExpenses()
     }
 
-    fun getAllExpenses() = allExpenses
+    fun getAllExpenses(): LiveData<List<Movements>> {
+        allExpenses = repository.getAllExpenses()
+        return allExpenses
+    }
 }

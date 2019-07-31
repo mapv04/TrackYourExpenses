@@ -17,6 +17,9 @@ class Movements {
     @SerializedName("date")
     @Expose
     val date: String? = null
+    @SerializedName("total")
+    @Expose
+    val total: Double? = null
     @SerializedName("account_id")
     @Expose
     val accountId: String? = null

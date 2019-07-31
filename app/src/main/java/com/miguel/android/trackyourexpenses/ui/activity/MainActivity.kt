@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), DashboardFragment.Callbacks, Dashboard
     /**
      * Get the details for the selected account
      */
-    override fun onAccountSelected(account: Accounts, view: View?) {
+    override fun onAccountSelected(account: String, view: View?) {
         view?.let {
             //Pass account as argument
             val action = DashboardFragmentDirections.actionDashboardFragmentToAccountDetailsFragment(account)

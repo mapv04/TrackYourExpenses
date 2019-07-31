@@ -6,9 +6,6 @@ import com.miguel.android.trackyourexpenses.data.api.response.Account
 import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
 
 class RequestAccount(account: Accounts) {
-    @SerializedName("_id")
-    @Expose
-    private val id: String? = account.id
     @SerializedName("name")
     @Expose
     private val name: String = account.name

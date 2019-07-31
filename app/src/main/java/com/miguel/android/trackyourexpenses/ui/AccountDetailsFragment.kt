@@ -1,5 +1,6 @@
 package com.miguel.android.trackyourexpenses.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,12 +14,27 @@ class AccountDetailsFragment: Fragment() {
 
     private val args: AccountDetailsFragmentArgs by navArgs()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        account = args.accountId
+
+        val fragment = RecyclerViewIncomes()
+        val transaction = fragmentManager?.beginTransaction()
+        transaction?.replace(R.id.fragmentAccountActivityContainer, fragment)
+        transaction?.commit()
+    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_account_details, container, false)
 
+        view.incomeTextView.setTextColor(Color.RED)
+
         view.incomeTextView.setOnClickListener {
-            val fragment = RecyclerViewIncomes(args.account.id)
+            view.incomeTextView.setTextColor(Color.RED)
+            view.expenseTextView.setTextColor(Color.BLACK)
+            val fragment = RecyclerViewIncomes()
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.fragmentAccountActivityContainer, fragment)
             transaction?.commit()
@@ -26,13 +42,19 @@ class AccountDetailsFragment: Fragment() {
         }
 
         view.expenseTextView.setOnClickListener {
-           val fragment = RecyclerViewExpenses(args.account.id)
+            view.expenseTextView.setTextColor(Color.RED)
+            view.incomeTextView.setTextColor(Color.BLACK)
+            val fragment = RecyclerViewExpenses()
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.fragmentAccountActivityContainer, fragment)
             transaction?.commit()
         }
         return view
 
+    }
+
+    companion object{
+        lateinit var account: String
     }
 
 

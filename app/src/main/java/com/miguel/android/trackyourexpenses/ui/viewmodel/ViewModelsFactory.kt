@@ -37,16 +37,6 @@ class NewAccountViewModelFactory(
     }
 }
 
-class IncomesViewModelFactory(
-    private val repository: AccountActivityRepository,
-    private val accountId: String
-): ViewModelProvider.NewInstanceFactory() {
-
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return IncomesViewModel(repository, accountId) as T
-    }
-}
 
 class DashboardViewModelFactory(
     private val repository: AccountRepository): ViewModelProvider.NewInstanceFactory() {
@@ -58,12 +48,3 @@ class DashboardViewModelFactory(
 
 }
 
-class ExpensesViewModelFactory(
-    private val repository: AccountActivityRepository,
-    private val accountId: String
-): ViewModelProvider.NewInstanceFactory(){
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return ExpensesViewModel(repository, accountId) as T
-    }
-}

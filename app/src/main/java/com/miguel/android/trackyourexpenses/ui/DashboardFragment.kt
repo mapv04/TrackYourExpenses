@@ -38,7 +38,7 @@ class DashboardFragment : Fragment() {
      * Required interface for hosting activities
      */
     interface Callbacks{
-        fun onAccountSelected(account: Accounts, view: View?)
+        fun onAccountSelected(account: String, view: View?)
     }
     interface OnDeleteAccountListener{
         fun onAccountIdSelected(account: Accounts, fragment: DashboardFragment)
@@ -195,7 +195,7 @@ class DashboardFragment : Fragment() {
             }
 
             override fun onClick(v: View?) {
-                this@DashboardFragment.mCallBack?.onAccountSelected(mAccount, v)
+                this@DashboardFragment.mCallBack?.onAccountSelected(mAccount.id, v)
             }
         }
     }
