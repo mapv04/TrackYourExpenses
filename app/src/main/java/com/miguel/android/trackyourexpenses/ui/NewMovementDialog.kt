@@ -12,11 +12,11 @@ import com.miguel.android.trackyourexpenses.data.Movs
 import kotlinx.android.synthetic.main.fragment_new_item.*
 import kotlinx.android.synthetic.main.fragment_new_item.view.*
 
-class NewMovementDialog: DialogFragment() {
+class NewMovementDialog(private val newMovementFragment: NewMovementFragment): DialogFragment() {
     private var itemListCallback: OnItemListListener? = null
 
     interface OnItemListListener{
-        fun onItemListCreated(item: ItemMov)
+        fun onItemListCreated(item: ItemMov, movementFragment: NewMovementFragment)
     }
 
     override fun onAttach(context: Context?) {
@@ -42,7 +42,7 @@ class NewMovementDialog: DialogFragment() {
                     view?.placeEditText?.text.toString(),
                     view?.totalEditText?.text.toString().toDouble()
                 )
-                itemListCallback?.onItemListCreated(item)
+                itemListCallback?.onItemListCreated(item, newMovementFragment)
 
                 dialog.dismiss()
             }

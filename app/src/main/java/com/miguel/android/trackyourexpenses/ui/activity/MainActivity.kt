@@ -16,6 +16,11 @@ import com.miguel.android.trackyourexpenses.ui.*
 
 class MainActivity : AppCompatActivity(), DashboardFragment.Callbacks, DashboardFragment.OnDeleteAccountListener, NewMovementDialog.OnItemListListener {
 
+    override fun onItemListCreated(item: ItemMov, fragment: NewMovementFragment) {
+        fragment.itemList.add(item)
+        fragment.newItem()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -40,10 +45,6 @@ class MainActivity : AppCompatActivity(), DashboardFragment.Callbacks, Dashboard
             val action = DashboardFragmentDirections.actionDashboardFragmentToAccountDetailsFragment(account)
             it.findNavController().navigate(action)
         }
-    }
-
-    override fun onItemListCreated(item: ItemMov) {
-        NewMovementFragment.itemList.add(item)
     }
 
 }

@@ -53,7 +53,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.1"
 
-    //RxJava2
+    //RxKotlin2
     implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
@@ -65,7 +65,6 @@ dependencies {
     implementation "androidx.room:room-runtime:2.1.0-alpha07"
     implementation "androidx.room:room-ktx:2.1.0-alpha07"
     kapt "androidx.room:room-compiler:2.1.0-alpha07"
-    implementation 'androidx.room:room-rxjava2:2.0.0'
 
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha01"
