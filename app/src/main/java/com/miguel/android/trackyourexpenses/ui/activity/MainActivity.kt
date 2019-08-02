@@ -14,7 +14,28 @@ import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
 import com.miguel.android.trackyourexpenses.databinding.ActivityFragmentBinding
 import com.miguel.android.trackyourexpenses.ui.*
 
-class MainActivity : AppCompatActivity(), DashboardFragment.Callbacks, DashboardFragment.OnDeleteAccountListener, NewMovementDialog.OnItemListListener {
+class MainActivity : AppCompatActivity(),
+    DashboardFragment.Callbacks,
+    DashboardFragment.OnDeleteAccountListener,
+    NewMovementDialog.OnItemListListener,
+    OnMovementSelected{
+    override fun onIncomeIdSelected(movementId: String?, view: View?) {
+        view?.let{v->
+            movementId?.let{
+                val action = AccountDetailsFragmentDirections.actionAccountDetailsFragmentToMovementDetailsFragment(movementId, "income")
+                v.findNavController().navigate(action)
+            }
+        }
+    }
+
+    override fun onExpenseIdSelected(movementId: String?, view: View?) {
+        view?.let{v ->
+            movementId?.let{
+                val action = AccountDetailsFragmentDirections.actionAccountDetailsFragmentToMovementDetailsFragment(movementId, "expense")
+                v.findNavController().navigate(action)
+            }
+        }
+    }
 
     override fun onItemListCreated(item: ItemMov, fragment: NewMovementFragment) {
         fragment.itemList.add(item)

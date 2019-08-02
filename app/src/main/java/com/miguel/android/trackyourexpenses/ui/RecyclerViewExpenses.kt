@@ -1,5 +1,6 @@
 package com.miguel.android.trackyourexpenses.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,17 @@ class RecyclerViewExpenses: Fragment() {
     private lateinit var model: ExpensesViewModel
     private lateinit var expenseAdapter: ExpenseAdapter
     private var listExpenses = emptyList<Expense>()
+    private var movementListener: OnMovementSelected? = null
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        movementListener = context as OnMovementSelected
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        movementListener = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,10 +93,15 @@ class RecyclerViewExpenses: Fragment() {
         }
 
 
-        private inner class ExpenseHolder(inflater: LayoutInflater, parent: ViewGroup): RecyclerView.ViewHolder(inflater.inflate(R.layout.movement_item, parent, false)){
+        private inner class ExpenseHolder(inflater: LayoutInflater, parent: ViewGroup): RecyclerView.ViewHolder(inflater.inflate(R.layout.movement_item, parent, false)), View.OnClickListener{
+            override fun onClick(v: View?) {
+                this@RecyclerViewExpenses.movementListener?.onExpenseIdSelected(mExpense.id, v)
+            }
+
             private var mExpenseName: TextView? = null
             private var mExpenseDate: TextView? = null
             private var mExpenseTotal: TextView? = null
+            private lateinit var mExpense: Expense
 
             init{
                 mExpenseName = itemView.findViewById(R.id.movementName)
@@ -93,6 +110,7 @@ class RecyclerViewExpenses: Fragment() {
             }
 
             fun bind(expense: Expense){
+                mExpense = expense
                 mExpenseName?.text = expense.name
                 mExpenseDate?.text = expense.date
                 mExpenseTotal?.text = expense.total.toString()

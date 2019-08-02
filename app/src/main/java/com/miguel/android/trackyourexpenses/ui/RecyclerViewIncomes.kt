@@ -1,5 +1,6 @@
 package com.miguel.android.trackyourexpenses.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -23,7 +24,17 @@ class RecyclerViewIncomes: Fragment() {
     private lateinit var model: IncomesViewModel
     private lateinit var incomeAdapter: IncomeAdapter
     private var listIncomes = emptyList<Income>()
+    private var movementListener: OnMovementSelected? = null
 
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        movementListener = context as OnMovementSelected
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        movementListener = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,18 +95,25 @@ class RecyclerViewIncomes: Fragment() {
         }
 
 
-        private inner class IncomeHolder(inflater: LayoutInflater, parent: ViewGroup): RecyclerView.ViewHolder(inflater.inflate(R.layout.movement_item, parent, false)){
+        private inner class IncomeHolder(inflater: LayoutInflater, parent: ViewGroup): RecyclerView.ViewHolder(inflater.inflate(R.layout.movement_item, parent, false)), View.OnClickListener{
+            override fun onClick(v: View?) {
+                this@RecyclerViewIncomes.movementListener?.onIncomeIdSelected(mIncome.id, v)
+            }
+
             private var mIncomeName: TextView? = null
             private var mIncomeDate: TextView? = null
             private var mIncomeTotal: TextView? = null
+            private lateinit var mIncome: Income
 
             init{
+                itemView.setOnClickListener(this)
                 mIncomeName = itemView.findViewById(R.id.movementName)
                 mIncomeDate = itemView.findViewById(R.id.movementDate)
                 mIncomeTotal = itemView.findViewById(R.id.movementTotal)
             }
 
             fun bind(income: Income){
+                mIncome = income
                 mIncomeName?.text = income.name
                 mIncomeDate?.text = income.date
                 mIncomeTotal?.text = income.total.toString()

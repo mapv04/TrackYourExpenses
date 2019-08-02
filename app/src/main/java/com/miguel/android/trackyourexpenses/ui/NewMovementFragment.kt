@@ -43,7 +43,6 @@ class NewMovementFragment: Fragment() {
 
     private val args: NewMovementFragmentArgs by navArgs()
     var itemList = mutableListOf<ItemMov>()
-    var mContext: Context? = null
 
     @SuppressLint("CheckResult")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
