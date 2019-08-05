@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.navhost_auth)
+        setContentView(R.layout.navhost)
 
     }
 
