@@ -1,25 +1,26 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/colorAccent</item>
         
         <item name="editTextColor">@style/Text</item>
-        <item name="buttonStyle">@style/Buttons</item>
+        <item name="materialButtonStyle">@style/Buttons</item>
 
     </style>
     <!-- Base application theme. -->
 
-    <style name="Text" parent="TextAppearance.AppCompat">
+    <style name="Text" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textColorHint">@color/secondaryLightColor</item>
     </style>
 
-    <style name="Buttons" parent="Widget.AppCompat.Button">
-        <item name="android:colorBackground">@color/secondaryColor</item>
+    <style name="Buttons" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/secondaryColor</item>
+        <item name="rippleColor">@color/secondaryDarkColor</item>
     </style>
 
     <style name="FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
