@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="viewmodel"
                   type="com.miguel.android.trackyourexpenses.ui.viewmodel.LoginViewModel"/>
@@ -7,34 +7,47 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:layout_height="match_parent">
 
-    <EditText
-            android:id="@+id/mUsername"
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/usernameLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:text="@={viewmodel.editTextUsername}"
             android:hint="@string/username"
+            android:layout_margin="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="8dp" >
+
+        <EditText
+                android:id="@+id/mUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:text="@={viewmodel.editTextUsername}"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            app:layout_constraintEnd_toEndOf="@+id/usernameLayout"
+            app:layout_constraintStart_toStartOf="@+id/usernameLayout"
+            app:layout_constraintTop_toBottomOf="@+id/usernameLayout">
 
     <EditText
             android:id="@+id/mPassword"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:ems="10"
             android:inputType="textPassword"
-            android:text="@={viewmodel.editTextPassword}"
-            android:hint="@string/password"
-            app:layout_constraintEnd_toEndOf="@+id/mUsername"
-            app:layout_constraintStart_toStartOf="@+id/mUsername"
-            app:layout_constraintTop_toBottomOf="@+id/mUsername" />
+            android:text="@={viewmodel.editTextPassword}"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
             android:id="@+id/mLogin"
@@ -43,9 +56,10 @@
             android:layout_marginTop="16dp"
             android:text="@string/login"
             android:onClick="@{() -> viewmodel.onLoginButtonClick()}"
-            app:layout_constraintEnd_toEndOf="@+id/mPassword"
-            app:layout_constraintStart_toStartOf="@+id/mPassword"
-            app:layout_constraintTop_toBottomOf="@+id/mPassword" />
+            app:layout_constraintEnd_toEndOf="@+id/passwordLayout"
+            app:layout_constraintStart_toStartOf="@+id/passwordLayout"
+            app:layout_constraintTop_toBottomOf="@+id/passwordLayout" android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
 
     <TextView
             android:id="@+id/mSignUp"
