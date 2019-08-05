@@ -26,7 +26,7 @@ class RecyclerViewIncomes: Fragment() {
     private var listIncomes = emptyList<Income>()
     private var movementListener: OnMovementSelected? = null
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         movementListener = context as OnMovementSelected
     }

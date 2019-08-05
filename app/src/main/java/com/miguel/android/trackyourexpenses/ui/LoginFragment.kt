@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.miguel.android.trackyourexpenses.ui.viewmodel.LoginViewModel

@@ -19,7 +19,7 @@ class NewMovementDialog(private val newMovementFragment: NewMovementFragment): D
         fun onItemListCreated(item: ItemMov, movementFragment: NewMovementFragment)
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         itemListCallback = context as OnItemListListener
     }

@@ -44,7 +44,7 @@ class DashboardFragment : Fragment() {
         fun onAccountIdSelected(account: Accounts, fragment: DashboardFragment)
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         mCallBack = context as Callbacks
         mDeleteCallBack = context as OnDeleteAccountListener
