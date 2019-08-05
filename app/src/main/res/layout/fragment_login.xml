@@ -13,8 +13,8 @@
             android:id="@+id/usernameLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            style="@style/ShrineTextInputLayout"
             android:hint="@string/username"
-            android:layout_margin="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="8dp" >
@@ -33,6 +33,7 @@
             android:id="@+id/passwordLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            style="@style/ShrineTextInputLayout"
             android:hint="@string/password"
             app:layout_constraintEnd_toEndOf="@+id/usernameLayout"
             app:layout_constraintStart_toStartOf="@+id/usernameLayout"
