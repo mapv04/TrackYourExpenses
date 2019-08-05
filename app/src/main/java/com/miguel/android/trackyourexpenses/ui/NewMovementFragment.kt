@@ -51,7 +51,10 @@ class NewMovementFragment: Fragment() {
         //Show the dialog fragment to add incomes
         view.addButton.setOnClickListener{
             val fragment = NewMovementDialog(this@NewMovementFragment)
-            fragment.show(fragmentManager, null)
+            fragmentManager?.let{
+                fragment.show(it, null)
+            }
+
         }
 
         view.btnSave.setOnClickListener {

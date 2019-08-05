@@ -25,7 +25,7 @@ class RecyclerViewExpenses: Fragment() {
     private var listExpenses = emptyList<Expense>()
     private var movementListener: OnMovementSelected? = null
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         movementListener = context as OnMovementSelected
     }
