@@ -29,6 +29,7 @@ class NewMovementDialog(private val newMovementFragment: NewMovementFragment): D
         itemListCallback = null
     }
 
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         lateinit var builder: AlertDialog.Builder
         val view = activity?.layoutInflater?.inflate(R.layout.fragment_new_item, null)
@@ -36,19 +37,22 @@ class NewMovementDialog(private val newMovementFragment: NewMovementFragment): D
         activity?.let {
             builder = AlertDialog.Builder(it)
             builder.setView(view)
-            builder.setPositiveButton(R.string.add){dialog, wich->
+
+            view?.btnCancel?.setOnClickListener {
+                dismiss()
+            }
+
+            view?.btnAdd?.setOnClickListener {
                 val item = ItemMov(
-                    view?.infoEditText?.text.toString(),
-                    view?.placeEditText?.text.toString(),
-                    view?.totalEditText?.text.toString().toDouble()
+                    view.infoEditText?.text.toString(),
+                    view.placeEditText?.text.toString(),
+                    view.totalEditText?.text.toString().toDouble()
                 )
                 itemListCallback?.onItemListCreated(item, newMovementFragment)
 
-                dialog.dismiss()
+                dismiss()
             }
-            builder.setNegativeButton(R.string.cancel){dialog, wich ->
-                dialog.dismiss()
-            }
+
         }
 
         return builder.create()
