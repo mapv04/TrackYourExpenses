@@ -32,7 +32,6 @@
             android:id="@+id/colorPicker"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/shape_circle"
             android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/colorTextView"
             app:layout_constraintVertical_bias="1.0" app:layout_constraintTop_toTopOf="@+id/colorTextView"

@@ -59,8 +59,9 @@ class NewAccountFragment : Fragment(){
                 val red = Color.red(color)
                 val green = Color.green(color)
                 val blue = Color.blue(color)
-                val gradient: GradientDrawable = it.background.mutate() as GradientDrawable
-                gradient.setColor(Color.argb(alpha, red, green, blue))
+               /* val gradient: GradientDrawable = it.background.mutate() as GradientDrawable
+                gradient.setColor(Color.argb(alpha, red, green, blue))*/
+                it.setBackgroundColor(Color.argb(alpha, red, green, blue))
                 gradientColor = Color.argb(alpha, red, green, blue)
             }
 
