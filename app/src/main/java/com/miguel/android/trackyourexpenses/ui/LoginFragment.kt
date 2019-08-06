@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.miguel.android.trackyourexpenses.ui.viewmodel.LoginViewModel
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.data.api.request.RequestLogin
@@ -21,6 +22,7 @@ import com.miguel.android.trackyourexpenses.data.api.retrofit.ExpensesClient
 import com.miguel.android.trackyourexpenses.data.api.retrofit.ExpensesService
 import com.miguel.android.trackyourexpenses.databinding.FragmentLoginBinding
 import com.miguel.android.trackyourexpenses.common.*
+import kotlinx.android.synthetic.main.fragment_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,6 +35,7 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     lateinit var expensesService: ExpensesService
     lateinit var expensesClient: ExpensesClient
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -77,11 +80,28 @@ class LoginFragment : Fragment() {
             Navigation.createNavigateOnClickListener(R.id.action_loginFragment_to_registerFragment)
         )
 
+        //Switch Login
+        binding.switchLogin.setOnCheckedChangeListener { button, isChecked ->
+            if(isChecked){
+                SharedPreferencesManager.setSomeBoolValue(PREF_KEEP_LOGIN, true)
+            }
+            else{
+                SharedPreferencesManager.setSomeBoolValue(PREF_KEEP_LOGIN, false)
+            }
+        }
+
         return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if(SharedPreferencesManager.getSomeBoolValue(PREF_KEEP_LOGIN)){
+            //Keep Login
+            findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
+        }
+
+
         val factory = InjectorUtils.provideLoginViewModelFactory(requireContext())
         model = activity?.run{
             ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)

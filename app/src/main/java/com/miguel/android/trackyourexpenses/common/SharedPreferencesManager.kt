@@ -16,6 +16,15 @@ class SharedPreferencesManager {
 
         fun getSomeStringValue(dataLabel: String) =
             MyApp.instance.getSharedPreferences(APP_SETTINGS_FILE, Context.MODE_PRIVATE).getString(dataLabel, null)
+
+        fun setSomeBoolValue(dataLabel: String, dataValue: Boolean){
+            val editor = MyApp.instance.getSharedPreferences(APP_SETTINGS_FILE, Context.MODE_PRIVATE).edit()
+            editor.putBoolean(dataLabel, dataValue)
+            editor.apply()
+        }
+
+        fun getSomeBoolValue(dataLabel: String) =
+            MyApp.instance.getSharedPreferences(APP_SETTINGS_FILE, Context.MODE_PRIVATE).getBoolean(dataLabel, false)
     }
 
 }
