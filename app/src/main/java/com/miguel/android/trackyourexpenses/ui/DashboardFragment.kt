@@ -97,7 +97,7 @@ class DashboardFragment : Fragment() {
     }
 
     private fun setAccountRecyclerViewItemTouchListener(v: View){
-        val itemTouch = object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT){
+        val itemTouch = object: ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -126,11 +126,31 @@ class DashboardFragment : Fragment() {
                 val itemView = viewHolder.itemView
 
                 val background = ColorDrawable(Color.RED)
-                val dx = dX.toInt()
-                background.setBounds(0, itemView.top, itemView.left + dx, itemView.bottom)
-                background.draw(c)
+                val backgroundCornerOffset = 20
+
                 val icon = ContextCompat.getDrawable(context!!,R.drawable.ic_delete_black_24dp)
-                icon?.setBounds(viewHolder.itemView.left - 50, viewHolder.itemView.top, viewHolder.itemView.right - 800, viewHolder.itemView.bottom)
+
+
+                val dx = dX.toInt()
+
+                when {
+                    dx > 0 -> {
+                        icon?.let{
+                            val iconMargin = (itemView.height - it.intrinsicHeight) / 2
+                            val iconTop = itemView.top + (itemView.height - it.intrinsicHeight) / 2
+                            val iconBottom = iconTop + it.intrinsicHeight
+                            val iconLeft = itemView.left + iconMargin
+                            val iconRight = itemView.left + iconMargin + it.intrinsicHeight
+                            it.setBounds(iconLeft, iconTop, iconRight, iconBottom)
+                        }
+                        background.setBounds(itemView.left, itemView.top, itemView.left + dx + backgroundCornerOffset, itemView.bottom)
+                    }
+                    dx > 0 -> background.setBounds(0,0,0,0)
+                    else -> //unswiped
+                        background.setBounds(0,0,0,0)
+                }
+
+                background.draw(c)
                 icon?.draw(c)
             }
 
