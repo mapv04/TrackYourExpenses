@@ -19,11 +19,14 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.common.InjectorUtils
 import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
 import com.miguel.android.trackyourexpenses.ui.viewmodel.DashboardViewModel
+import kotlinx.android.synthetic.main.fragment_account_list.*
 import kotlinx.android.synthetic.main.fragment_account_list.view.*
+import kotlinx.android.synthetic.main.fragment_account_list.view.swipeRefresh
 
 class DashboardFragment : Fragment() {
 
@@ -58,6 +61,7 @@ class DashboardFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_account_list, container, false)
+        view.swipeRefresh.setColorSchemeResources(R.color.primaryDarkColor)
 
         accountAdapter = AccountAdapter(listAccounts)
 
@@ -71,6 +75,7 @@ class DashboardFragment : Fragment() {
         )
 
         model.getAllAccounts().observe(this, Observer {
+            swipeRefresh.isRefreshing = false
             val accountList: List<Accounts> = it.map{ account ->
                 Accounts(account.id!!, account.name!!, account.color!!,
                     account.imageLocation!!, account.lastUpdate!!, account.userId!!)
@@ -78,6 +83,11 @@ class DashboardFragment : Fragment() {
 
             accountAdapter.setNewAccounts(accountList)
         })
+
+
+        view.swipeRefresh.setOnRefreshListener {
+            model.getAllAccounts()
+        }
 
         setAccountRecyclerViewItemTouchListener(view)
 

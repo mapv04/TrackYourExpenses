@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="viewmodel"
+                  type="com.miguel.android.trackyourexpenses.ui.viewmodel.MovItemViewModel"/>
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
                                                    android:layout_height="match_parent">
 
     <TextView
-            android:text="TextView"
+            android:text="@{viewmodel.movement.name}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/movementName" app:layout_constraintStart_toStartOf="parent"
@@ -13,7 +20,7 @@
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:textSize="24sp"
             android:gravity="center"/>
     <TextView
-            android:text="TextView"
+            android:text="@{viewmodel.movement.description}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/movementDescription" android:layout_marginTop="24dp"
@@ -26,6 +33,18 @@
             android:layout_height="wrap_content" android:layout_marginTop="32dp"
             app:layout_constraintTop_toBottomOf="@+id/movementDescription"
             app:layout_constraintStart_toStartOf="@+id/movementDescription"
-            app:layout_constraintEnd_toEndOf="@+id/movementDescription">
+            app:layout_constraintEnd_toEndOf="@+id/movementDescription" android:id="@+id/movementsItemContainer">
     </LinearLayout>
+    <Button
+            android:text="@string/ok"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnOk"
+            app:layout_constraintTop_toBottomOf="@+id/movementsItemContainer"
+            app:layout_constraintEnd_toEndOf="@+id/movementsItemContainer"
+            android:layout_marginTop="40dp"
+            app:layout_constraintStart_toStartOf="@+id/movementsItemContainer" android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

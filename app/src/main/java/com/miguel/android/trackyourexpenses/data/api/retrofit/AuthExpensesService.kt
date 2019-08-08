@@ -29,4 +29,10 @@ interface AuthExpensesService {
 
     @GET("api/user/accounts/expenses/allExpenses/{id}")
     fun getAllExpenses(@Path("id") accountId: String): Call<List<Movements>>
+
+    @GET("api/user/accounts/incomes/income/{id}")
+    fun getIncome(@Path("id") incomeId: String): Call<Movements>
+
+    @GET("api/user/accounts/expenses/expense/{id}")
+    fun getExpense(@Path("id") expenseId: String): Call<Movements>
 }

@@ -1,6 +1,7 @@
 package com.miguel.android.trackyourexpenses.common
 
 import android.content.Context
+import android.content.SharedPreferences
 
 
 class SharedPreferencesManager {
@@ -8,23 +9,27 @@ class SharedPreferencesManager {
     companion object {
         private const val APP_SETTINGS_FILE = "APP_SETTINGS"
 
+        private fun getSharedPreferences(): SharedPreferences {
+            return MyApp.instance.getSharedPreferences(APP_SETTINGS_FILE, Context.MODE_PRIVATE)
+        }
+
         fun setSomeStringValue(dataLabel: String, dataValue: String) {
-            val editor = MyApp.instance.getSharedPreferences(APP_SETTINGS_FILE, Context.MODE_PRIVATE).edit()
+            val editor = getSharedPreferences().edit()
             editor.putString(dataLabel, dataValue)
             editor.apply()
         }
 
         fun getSomeStringValue(dataLabel: String) =
-            MyApp.instance.getSharedPreferences(APP_SETTINGS_FILE, Context.MODE_PRIVATE).getString(dataLabel, null)
+           getSharedPreferences().getString(dataLabel, null)
 
         fun setSomeBoolValue(dataLabel: String, dataValue: Boolean){
-            val editor = MyApp.instance.getSharedPreferences(APP_SETTINGS_FILE, Context.MODE_PRIVATE).edit()
+            val editor = getSharedPreferences().edit()
             editor.putBoolean(dataLabel, dataValue)
             editor.apply()
         }
 
         fun getSomeBoolValue(dataLabel: String) =
-            MyApp.instance.getSharedPreferences(APP_SETTINGS_FILE, Context.MODE_PRIVATE).getBoolean(dataLabel, false)
+            getSharedPreferences().getBoolean(dataLabel, false)
     }
 
 }

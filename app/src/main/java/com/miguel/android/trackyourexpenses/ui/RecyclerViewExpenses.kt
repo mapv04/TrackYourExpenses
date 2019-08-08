@@ -13,14 +13,13 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miguel.android.trackyourexpenses.R
-import com.miguel.android.trackyourexpenses.common.InjectorUtils
 import com.miguel.android.trackyourexpenses.data.database.entity.Expense
-import com.miguel.android.trackyourexpenses.ui.viewmodel.ExpensesViewModel
+import com.miguel.android.trackyourexpenses.ui.viewmodel.MovementsViewModel
 import kotlinx.android.synthetic.main.fragment_expenses_list.view.*
 
 class RecyclerViewExpenses: Fragment() {
 
-    private lateinit var model: ExpensesViewModel
+    private lateinit var model: MovementsViewModel
     private lateinit var expenseAdapter: ExpenseAdapter
     private var listExpenses = emptyList<Expense>()
     private var movementListener: OnMovementSelected? = null
@@ -39,7 +38,7 @@ class RecyclerViewExpenses: Fragment() {
         super.onCreate(savedInstanceState)
 
         model = activity?.run {
-            ViewModelProviders.of(this).get(ExpensesViewModel::class.java)
+            ViewModelProviders.of(this).get(MovementsViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
     }
 

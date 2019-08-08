@@ -96,6 +96,7 @@ class LoginFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         if(SharedPreferencesManager.getSomeBoolValue(PREF_KEEP_LOGIN)){
             //Keep Login
             findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)

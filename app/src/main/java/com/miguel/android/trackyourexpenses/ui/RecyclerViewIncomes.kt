@@ -2,7 +2,6 @@ package com.miguel.android.trackyourexpenses.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,14 +13,13 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miguel.android.trackyourexpenses.R
-import com.miguel.android.trackyourexpenses.common.InjectorUtils
 import com.miguel.android.trackyourexpenses.data.database.entity.Income
-import com.miguel.android.trackyourexpenses.ui.viewmodel.IncomesViewModel
+import com.miguel.android.trackyourexpenses.ui.viewmodel.MovementsViewModel
 import kotlinx.android.synthetic.main.fragment_incomes_list.view.*
 
 class RecyclerViewIncomes: Fragment() {
 
-    private lateinit var model: IncomesViewModel
+    private lateinit var model: MovementsViewModel
     private lateinit var incomeAdapter: IncomeAdapter
     private var listIncomes = emptyList<Income>()
     private var movementListener: OnMovementSelected? = null
@@ -40,7 +38,7 @@ class RecyclerViewIncomes: Fragment() {
         super.onCreate(savedInstanceState)
 
         model = activity?.run {
-            ViewModelProviders.of(this).get(IncomesViewModel::class.java)
+            ViewModelProviders.of(this).get(MovementsViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
     }
 
