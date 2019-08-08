@@ -12,5 +12,5 @@
 /captures
 .externalNativeBuild
 /.idea/misc.xml
-app/src/main/res/xml/network_security_config.xml
+./app/src/main/res/xml/network_security_config.xml
 
