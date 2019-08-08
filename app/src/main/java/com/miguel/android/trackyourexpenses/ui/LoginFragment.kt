@@ -56,7 +56,8 @@ class LoginFragment : Fragment() {
                         SharedPreferencesManager.setSomeStringValue(PREF_TOKEN, response.body()?.token.toString())
                         SharedPreferencesManager.setSomeStringValue(PREF_NAME, response.body()?.name.toString() + " " + response.body()?.lastname.toString())
                         SharedPreferencesManager.setSomeStringValue(PREF_USERNAME, response.body()?.username.toString())
-                        view?.findNavController()?.navigate(R.id.action_loginFragment_to_dashboardFragment)
+                        view?.findNavController()?.navigate(R.id.action_loginFragment_to_accountActivity)
+                        activity?.finish()
                     }
                     else{
                         Toast.makeText(activity, response.body()?.message.toString(), Toast.LENGTH_SHORT).show()
@@ -99,7 +100,7 @@ class LoginFragment : Fragment() {
 
         if(SharedPreferencesManager.getSomeBoolValue(PREF_KEEP_LOGIN)){
             //Keep Login
-            findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
+            findNavController().navigate(R.id.action_loginFragment_to_accountActivity)
         }
 
 
