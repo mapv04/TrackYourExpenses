@@ -56,7 +56,7 @@ class RecyclerViewIncomes: Fragment() {
          * Add new Income
          */
         view.fab.setOnClickListener{
-            val action = AccountDetailsFragmentDirections.actionAccountDetailsFragmentToNewMovementFragment("income", AccountDetailsFragment.account)
+            val action = AccountDetailsFragmentDirections.actionAccountDetailsFragmentToNewMovementFragment("income")
             it.findNavController().navigate(action)
         }
 

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/navigation_details"
+app:startDestination="@id/accountDetailsFragment">
+
+    <fragment android:id="@+id/accountDetailsFragment"
+              android:name="com.miguel.android.trackyourexpenses.ui.AccountDetailsFragment"
+              android:label="AccountDetailsFragment"
+              tools:layout="@layout/fragment_account_details">
+
+        <!--Action back to destination wich launched into this navigation graph -->
+
+        <action android:id="@+id/action_accountDetailsFragment_to_newMovementFragment"
+                app:destination="@id/newMovementFragment"/>
+        <argument android:name="accountId"
+                  app:argType="string"/>
+        <action android:id="@+id/action_accountDetailsFragment_to_movementDetailsFragment"
+                app:destination="@id/movementDetailsFragment"/>
+        <action android:id="@+id/action_accountDetailsFragment_to_accountActivity2"
+                app:destination="@id/accountActivity2"/>
+    </fragment>
+
+    <fragment android:id="@+id/newMovementFragment"
+              android:name="com.miguel.android.trackyourexpenses.ui.NewMovementFragment"
+              android:label="NewMovementFragment"
+              tools:layout="@layout/fragment_new_movement">
+        <argument android:name="option" app:argType="string"/>
+        <action android:id="@+id/action_newMovementFragment_to_accountDetailsFragment"
+                app:destination="@id/accountDetailsFragment"/>
+    </fragment>
+
+    <fragment android:id="@+id/movementDetailsFragment"
+              android:name="com.miguel.android.trackyourexpenses.ui.MovementDetailsFragment"
+              android:label="MovementDetailsFragment"
+              tools:layout="@layout/fragment_movements_details">
+        <action android:id="@+id/action_movementDetailsFragment_to_accountDetailsFragment"
+                app:destination="@id/accountDetailsFragment" />
+        <argument android:name="movementId" app:argType="string"/>
+        <argument android:name="movementType" app:argType="string"/>
+    </fragment>
+    <activity android:id="@+id/accountActivity2"
+              android:name="com.miguel.android.trackyourexpenses.ui.activity.AccountActivity"
+              android:label="AccountActivity"
+              tools:layout="@layout/navhost_account"/>
+
+</navigation>

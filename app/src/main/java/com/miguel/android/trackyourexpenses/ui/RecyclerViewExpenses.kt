@@ -56,7 +56,7 @@ class RecyclerViewExpenses: Fragment() {
          * Add new expense
          */
         view.fab.setOnClickListener{
-            val action = AccountDetailsFragmentDirections.actionAccountDetailsFragmentToNewMovementFragment("expense", AccountDetailsFragment.account)
+            val action = AccountDetailsFragmentDirections.actionAccountDetailsFragmentToNewMovementFragment("expense")
             it.findNavController().navigate(action)
         }
 

@@ -1,34 +1,19 @@
 package com.miguel.android.trackyourexpenses.ui
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.navigateUp
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.data.ItemMov
 import com.miguel.android.trackyourexpenses.data.Movs
-import com.miguel.android.trackyourexpenses.data.api.retrofit.AuthExpensesClient
-import com.miguel.android.trackyourexpenses.data.api.retrofit.AuthExpensesService
 import com.miguel.android.trackyourexpenses.data.repository.AccountActivityRepository
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.rxkotlin.toObservable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_new_movement.view.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -42,6 +27,8 @@ import java.util.*
 class NewMovementFragment: Fragment() {
 
     private val args: NewMovementFragmentArgs by navArgs()
+    private val previousArgs: AccountDetailsFragmentArgs by navArgs()
+
     var itemList = mutableListOf<ItemMov>()
 
     @SuppressLint("CheckResult")
@@ -79,7 +66,7 @@ class NewMovementFragment: Fragment() {
                 else -> throw UnselectedMovementTypeException()
             }
 
-           val action = NewMovementFragmentDirections.actionNewMovementFragmentToAccountDetailsFragment(args.accountId)
+           val action = NewMovementFragmentDirections.actionNewMovementFragmentToAccountDetailsFragment(previousArgs.accountId)
             view.findNavController().navigate(action)
 
         }
