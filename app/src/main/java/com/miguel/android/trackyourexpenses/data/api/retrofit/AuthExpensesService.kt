@@ -35,4 +35,13 @@ interface AuthExpensesService {
 
     @GET("api/user/accounts/expenses/expense/{id}")
     fun getExpense(@Path("id") expenseId: String): Call<Movements>
+
+    @PUT("api/user/accounts/updateAccount/{id}")
+    fun updateAccount(@Path("id") accountId: String, @Body requestAccount: RequestAccount)
+
+    @PUT("api/user/accounts/incomes/income/updateIncome/{id}")
+    fun updateIncome(@Path("id") accountId: String, @Body requestIncome: RequestMov)
+
+    @PUT("api/user/accounts/expenses/expense/updateExpense/{id}")
+    fun updateExpense(@Path("id") accountId: String, @Body requestExpense: RequestMov)
 }
