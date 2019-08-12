@@ -2,7 +2,7 @@ package com.miguel.android.trackyourexpenses.common
 
 import android.content.Context
 import com.miguel.android.trackyourexpenses.data.database.MoneyManagerRoomDB
-import com.miguel.android.trackyourexpenses.data.repository.AccountRepository
+import com.miguel.android.trackyourexpenses.repository.AccountRepository
 import com.miguel.android.trackyourexpenses.viewmodel.*
 
 object InjectorUtils{

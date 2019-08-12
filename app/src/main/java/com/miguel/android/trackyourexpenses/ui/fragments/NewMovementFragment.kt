@@ -13,7 +13,7 @@ import androidx.navigation.fragment.navArgs
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.data.ItemMov
 import com.miguel.android.trackyourexpenses.data.Movs
-import com.miguel.android.trackyourexpenses.data.repository.AccountActivityRepository
+import com.miguel.android.trackyourexpenses.repository.AccountActivityRepository
 import kotlinx.android.synthetic.main.fragment_new_movement.view.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -68,7 +68,7 @@ class NewMovementFragment: Fragment() {
 
            val action =
                NewMovementFragmentDirections.actionNewMovementFragmentToAccountDetailsFragment(
-                   previousArgs.accountId
+                   //previousArgs.accountId
                )
             view.findNavController().navigate(action)
 

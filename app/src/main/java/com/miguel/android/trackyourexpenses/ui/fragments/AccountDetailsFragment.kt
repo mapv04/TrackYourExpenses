@@ -19,10 +19,6 @@ class AccountDetailsFragment: Fragment() {
 
         account = args.accountId
 
-        val fragment = RecyclerViewIncomes()
-        val transaction = fragmentManager?.beginTransaction()
-        transaction?.replace(R.id.fragmentAccountActivityContainer, fragment)
-        transaction?.commit()
     }
 
 
@@ -30,6 +26,11 @@ class AccountDetailsFragment: Fragment() {
         val view = inflater.inflate(R.layout.fragment_account_details, container, false)
 
         view.incomeTextView.setTextColor(Color.RED)
+
+        val fragment = RecyclerViewIncomes()
+        val transaction = fragmentManager?.beginTransaction()
+        transaction?.replace(R.id.fragmentAccountActivityContainer, fragment)
+        transaction?.commit()
 
         view.incomeTextView.setOnClickListener {
             view.incomeTextView.setTextColor(Color.RED)

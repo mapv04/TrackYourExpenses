@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.miguel.android.trackyourexpenses.data.api.request.RequestLogin
-import com.miguel.android.trackyourexpenses.data.repository.AuthRepository
+import com.miguel.android.trackyourexpenses.repository.AuthRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

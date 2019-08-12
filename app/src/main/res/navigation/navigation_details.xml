@@ -27,7 +27,7 @@ app:startDestination="@id/accountDetailsFragment">
               tools:layout="@layout/fragment_new_movement">
         <argument android:name="option" app:argType="string"/>
         <action android:id="@+id/action_newMovementFragment_to_accountDetailsFragment"
-                app:destination="@id/accountDetailsFragment"/>
+               app:popUpTo="@id/navigation_details"/>
     </fragment>
 
     <fragment android:id="@+id/movementDetailsFragment"
@@ -35,7 +35,7 @@ app:startDestination="@id/accountDetailsFragment">
               android:label="MovementDetailsFragment"
               tools:layout="@layout/fragment_movements_details">
         <action android:id="@+id/action_movementDetailsFragment_to_accountDetailsFragment"
-                app:destination="@id/accountDetailsFragment" />
+                app:popUpTo="@id/navigation_details" />
         <argument android:name="movementId" app:argType="string"/>
         <argument android:name="movementType" app:argType="string"/>
     </fragment>

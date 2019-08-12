@@ -3,7 +3,7 @@ package com.miguel.android.trackyourexpenses.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.miguel.android.trackyourexpenses.data.api.response.Movements
-import com.miguel.android.trackyourexpenses.data.repository.MovementRepository
+import com.miguel.android.trackyourexpenses.repository.MovementRepository
 import com.miguel.android.trackyourexpenses.ui.fragments.MovementDetailsFragment
 
 class MovItemViewModel(movementType: String): ViewModel() {

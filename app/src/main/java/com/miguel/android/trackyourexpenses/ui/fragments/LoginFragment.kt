@@ -17,7 +17,7 @@ import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.data.api.request.RequestLogin
 import com.miguel.android.trackyourexpenses.databinding.FragmentLoginBinding
 import com.miguel.android.trackyourexpenses.common.*
-import com.miguel.android.trackyourexpenses.data.repository.AuthRepository
+import com.miguel.android.trackyourexpenses.repository.AuthRepository
 
 
 class LoginFragment : Fragment() {

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.miguel.android.trackyourexpenses.data.api.response.Account
 import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
-import com.miguel.android.trackyourexpenses.data.repository.AccountRepository
+import com.miguel.android.trackyourexpenses.repository.AccountRepository
 
 class DashboardViewModel(
     private val repository: AccountRepository

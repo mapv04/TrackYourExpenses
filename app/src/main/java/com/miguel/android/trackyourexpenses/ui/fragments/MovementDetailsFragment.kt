@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.common.InjectorUtils
-import com.miguel.android.trackyourexpenses.data.repository.MovementRepository
+import com.miguel.android.trackyourexpenses.repository.MovementRepository
 import com.miguel.android.trackyourexpenses.databinding.FragmentMovementsDetailsBinding
 import com.miguel.android.trackyourexpenses.viewmodel.MovItemViewModel
 

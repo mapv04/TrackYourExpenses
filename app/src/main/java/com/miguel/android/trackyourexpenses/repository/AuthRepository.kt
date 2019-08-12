@@ -1,4 +1,4 @@
-package com.miguel.android.trackyourexpenses.data.repository
+package com.miguel.android.trackyourexpenses.repository
 
 import android.util.Log
 import com.miguel.android.trackyourexpenses.common.PREF_NAME
