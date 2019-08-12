@@ -17,7 +17,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:ems="10"
-            android:text="@={viewmodel.editTextName}"
             android:hint="@string/name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:ems="10"
-            android:text="@={viewmodel.editTextLastName}"
             android:hint="@string/lastname"
             app:layout_constraintEnd_toEndOf="@+id/nameEditText"
             app:layout_constraintStart_toStartOf="@+id/nameEditText"
@@ -40,7 +38,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:ems="10"
-            android:text="@={viewmodel.editTextUsername}"
             android:hint="@string/username"
             app:layout_constraintEnd_toEndOf="@+id/lastnameEditText"
             app:layout_constraintStart_toStartOf="@+id/lastnameEditText"
@@ -53,7 +50,6 @@
             android:layout_marginTop="16dp"
             android:ems="10"
             android:inputType="textEmailAddress"
-            android:text="@={viewmodel.editTextEmail}"
             android:hint="@string/email"
             app:layout_constraintEnd_toEndOf="@+id/usernameEditText"
             app:layout_constraintStart_toStartOf="@+id/usernameEditText"
@@ -66,7 +62,6 @@
             android:layout_marginTop="16dp"
             android:ems="10"
             android:inputType="textPassword"
-            android:text="@={viewmodel.editTextPassword}"
             android:hint="@string/password"
             app:layout_constraintEnd_toEndOf="@+id/emailEditText"
             app:layout_constraintStart_toStartOf="@+id/emailEditText"
@@ -80,8 +75,7 @@
             android:text="@string/sign_up"
             app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
             app:layout_constraintStart_toStartOf="@+id/passwordEditText"
-            app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
-            android:onClick="@{() -> viewmodel.onSignUpButtonClick()}"/>
+            app:layout_constraintTop_toBottomOf="@+id/passwordEditText"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

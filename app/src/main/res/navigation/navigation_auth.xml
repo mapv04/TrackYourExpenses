@@ -23,7 +23,7 @@
         <!--Action back to destination wich launched into this navigation graph-->
         <action
                 android:id="@+id/action_registerFragment_to_loginFragment"
-                app:popUpTo="@navigation/navigation_auth"/>
+                app:popUpTo="@id/navigation_auth"/>
     </fragment>
     <activity android:id="@+id/accountActivity"
               android:name="com.miguel.android.trackyourexpenses.ui.activity.AccountActivity"

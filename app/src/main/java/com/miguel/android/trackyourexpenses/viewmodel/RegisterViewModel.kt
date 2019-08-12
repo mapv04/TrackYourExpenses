@@ -1,61 +1,25 @@
 package com.miguel.android.trackyourexpenses.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.miguel.android.trackyourexpenses.data.database.entity.User
-import com.miguel.android.trackyourexpenses.data.repository.UserRepository
+import com.miguel.android.trackyourexpenses.data.api.request.RequestSignUp
+import com.miguel.android.trackyourexpenses.data.repository.AuthRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
 class RegisterViewModel(
-    private val repository: UserRepository
 ): ViewModel() {
 
-    private val _user = MutableLiveData<User>()
-    val editTextName = MutableLiveData<String>()
-    val editTextLastName = MutableLiveData<String>()
-    val editTextUsername = MutableLiveData<String>()
-    val editTextEmail = MutableLiveData<String>()
-    val editTextPassword = MutableLiveData<String>()
-
-    // The data exposed to the fragment
-    val user: LiveData<User>
-        get() = _user
+    val responseRegister = MutableLiveData<Int>()
+    private val repository = AuthRepository()
 
 
-    fun onSignUpButtonClick(){
-        if(editTextName.value != null && editTextLastName.value != null && editTextUsername.value != null &&
-            editTextEmail.value != null && editTextPassword.value != null) {
-
-            val newUser = User(
-                "", editTextName.value!!,
-                editTextLastName.value!!,
-                editTextUsername.value!!,
-                editTextEmail.value!!,
-                editTextPassword.value!!
-            )
-            _user.value = newUser
+    fun register(requestRegister: RequestSignUp){
+        viewModelScope.launch(Dispatchers.IO) {
+            responseRegister.postValue(repository.register(requestRegister))
         }
-    }
-
-
-
-    fun userExists(username: String): Int = repository.checkIfExists(username).get()
-
-
-    fun addNewUser(user: User) = viewModelScope.launch(Dispatchers.IO) {
-            repository.addNewUser(user)
-        }
-
-    fun onUserCreated(){
-        _user.value = null
-    }
-
-    override fun onCleared() {
-        super.onCleared()
     }
 
 }

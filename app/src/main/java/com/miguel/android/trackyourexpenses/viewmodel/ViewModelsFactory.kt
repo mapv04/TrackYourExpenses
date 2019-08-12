@@ -3,7 +3,6 @@ package com.miguel.android.trackyourexpenses.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.miguel.android.trackyourexpenses.data.repository.AccountRepository
-import com.miguel.android.trackyourexpenses.data.repository.UserRepository
 
 class LoginViewModelFactory: ViewModelProvider.NewInstanceFactory() {
 
@@ -13,15 +12,6 @@ class LoginViewModelFactory: ViewModelProvider.NewInstanceFactory() {
     }
 }
 
-class RegisterViewModelFactory(
-    private val repository: UserRepository
-): ViewModelProvider.NewInstanceFactory() {
-
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return RegisterViewModel(repository) as T
-    }
-}
 
 class NewAccountViewModelFactory(
     private val repository: AccountRepository

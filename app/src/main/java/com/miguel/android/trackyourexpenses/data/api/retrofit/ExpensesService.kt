@@ -12,5 +12,5 @@ interface ExpensesService {
     @POST("api/user/auth/login")
     suspend fun doLogin(@Body requestLogin: RequestLogin): Response<ResponseAuth>
     @POST("api/user/auth/register")
-    fun doSignUp(@Body requestSignUp: RequestSignUp): Call<ResponseAuth>
+    suspend fun doSignUp(@Body requestSignUp: RequestSignUp): Response<ResponseAuth>
 }

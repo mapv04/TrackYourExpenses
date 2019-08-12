@@ -7,17 +7,17 @@ import com.miguel.android.trackyourexpenses.data.database.entity.User
 class RequestSignUp(user: User) {
     @SerializedName("name")
     @Expose
-    private val name: String = user.name
+    private val name: String = user.name.toLowerCase().trim()
     @SerializedName("lastname")
     @Expose
-    private val lastname: String = user.lastname
+    private val lastname: String = user.lastname.toLowerCase().trim()
     @SerializedName("email")
     @Expose
-    private val email: String = user.email
+    private val email: String = user.email.trim()
     @SerializedName("username")
     @Expose
-    private val username: String = user.username
+    private val username: String = user.username.toLowerCase().trim()
     @SerializedName("password")
     @Expose
-    private val password: String = user.password
+    private val password: String = user.password.toLowerCase().trim()
 }
