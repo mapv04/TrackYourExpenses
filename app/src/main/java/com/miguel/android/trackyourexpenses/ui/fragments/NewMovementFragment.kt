@@ -1,4 +1,4 @@
-package com.miguel.android.trackyourexpenses.ui
+package com.miguel.android.trackyourexpenses.ui.fragments
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -66,7 +66,10 @@ class NewMovementFragment: Fragment() {
                 else -> throw UnselectedMovementTypeException()
             }
 
-           val action = NewMovementFragmentDirections.actionNewMovementFragmentToAccountDetailsFragment(previousArgs.accountId)
+           val action =
+               NewMovementFragmentDirections.actionNewMovementFragmentToAccountDetailsFragment(
+                   previousArgs.accountId
+               )
             view.findNavController().navigate(action)
 
         }

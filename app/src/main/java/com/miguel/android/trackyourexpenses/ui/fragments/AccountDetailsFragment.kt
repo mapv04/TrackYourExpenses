@@ -1,4 +1,4 @@
-package com.miguel.android.trackyourexpenses.ui
+package com.miguel.android.trackyourexpenses.ui.fragments
 
 import android.graphics.Color
 import android.os.Bundle

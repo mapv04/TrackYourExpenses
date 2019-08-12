@@ -7,6 +7,8 @@ import androidx.navigation.findNavController
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
 import com.miguel.android.trackyourexpenses.ui.*
+import com.miguel.android.trackyourexpenses.ui.fragments.DashboardFragment
+import com.miguel.android.trackyourexpenses.ui.fragments.DashboardFragmentDirections
 
 class AccountActivity: AppCompatActivity(), DashboardFragment.Callbacks,
 DashboardFragment.OnDeleteAccountListener{

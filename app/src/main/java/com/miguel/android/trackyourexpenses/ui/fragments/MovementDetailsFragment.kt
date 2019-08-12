@@ -1,4 +1,4 @@
-package com.miguel.android.trackyourexpenses.ui
+package com.miguel.android.trackyourexpenses.ui.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -13,12 +13,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.common.InjectorUtils
-import com.miguel.android.trackyourexpenses.data.api.response.Movements
 import com.miguel.android.trackyourexpenses.data.repository.MovementRepository
 import com.miguel.android.trackyourexpenses.databinding.FragmentMovementsDetailsBinding
-import com.miguel.android.trackyourexpenses.ui.viewmodel.MovItemViewModel
-import kotlinx.android.synthetic.main.fragment_movements_details.view.*
-import kotlinx.android.synthetic.main.movement_item.view.movementName
+import com.miguel.android.trackyourexpenses.viewmodel.MovItemViewModel
 
 class MovementDetailsFragment: Fragment() {
 

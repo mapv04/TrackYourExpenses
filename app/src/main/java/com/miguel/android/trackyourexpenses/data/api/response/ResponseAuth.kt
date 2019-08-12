@@ -18,5 +18,5 @@ class ResponseAuth {
     val username: String? = null
     @SerializedName("message")
     @Expose
-    val message: String? = null
+    val message: Int? = null
 }

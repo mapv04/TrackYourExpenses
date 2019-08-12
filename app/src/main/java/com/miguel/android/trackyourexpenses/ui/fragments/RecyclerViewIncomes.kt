@@ -1,4 +1,4 @@
-package com.miguel.android.trackyourexpenses.ui
+package com.miguel.android.trackyourexpenses.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -14,7 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.data.database.entity.Income
-import com.miguel.android.trackyourexpenses.ui.viewmodel.MovementsViewModel
+import com.miguel.android.trackyourexpenses.ui.OnMovementSelected
+import com.miguel.android.trackyourexpenses.viewmodel.MovementsViewModel
 import kotlinx.android.synthetic.main.fragment_incomes_list.view.*
 
 class RecyclerViewIncomes: Fragment() {
@@ -56,7 +57,10 @@ class RecyclerViewIncomes: Fragment() {
          * Add new Income
          */
         view.fab.setOnClickListener{
-            val action = AccountDetailsFragmentDirections.actionAccountDetailsFragmentToNewMovementFragment("income")
+            val action =
+                AccountDetailsFragmentDirections.actionAccountDetailsFragmentToNewMovementFragment(
+                    "income"
+                )
             it.findNavController().navigate(action)
         }
 

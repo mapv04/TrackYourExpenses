@@ -4,7 +4,7 @@ import android.content.Context
 import com.miguel.android.trackyourexpenses.data.database.MoneyManagerRoomDB
 import com.miguel.android.trackyourexpenses.data.repository.AccountRepository
 import com.miguel.android.trackyourexpenses.data.repository.UserRepository
-import com.miguel.android.trackyourexpenses.ui.viewmodel.*
+import com.miguel.android.trackyourexpenses.viewmodel.*
 
 object InjectorUtils{
 
@@ -22,9 +22,8 @@ object InjectorUtils{
 
 
 
-    fun provideLoginViewModelFactory(context: Context): LoginViewModelFactory {
-        val repository = getUserRepository(context)
-        return LoginViewModelFactory(repository)
+    fun provideLoginViewModelFactory(): LoginViewModelFactory {
+        return LoginViewModelFactory()
     }
 
     fun provideRegisterViewModelFactory(context: Context): RegisterViewModelFactory {

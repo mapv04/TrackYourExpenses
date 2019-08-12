@@ -4,7 +4,7 @@
             android:id="@+id/navigation_auth" app:startDestination="@id/loginFragment">
     <fragment
             android:id="@+id/loginFragment"
-            android:name="com.miguel.android.trackyourexpenses.ui.LoginFragment"
+            android:name="com.miguel.android.trackyourexpenses.ui.fragments.LoginFragment"
             android:label="LoginFragment"
             tools:layout="@layout/fragment_login">
         <action
@@ -16,7 +16,7 @@
 
     <fragment
             android:id="@+id/registerFragment"
-            android:name="com.miguel.android.trackyourexpenses.ui.RegisterFragment"
+            android:name="com.miguel.android.trackyourexpenses.ui.fragments.RegisterFragment"
             android:label="RegisterFragment"
             tools:layout="@layout/fragment_register">
 

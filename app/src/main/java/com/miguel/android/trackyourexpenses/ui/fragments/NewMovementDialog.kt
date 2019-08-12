@@ -1,15 +1,12 @@
-package com.miguel.android.trackyourexpenses.ui
+package com.miguel.android.trackyourexpenses.ui.fragments
 
 import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.data.ItemMov
-import com.miguel.android.trackyourexpenses.data.Movs
-import kotlinx.android.synthetic.main.fragment_new_item.*
 import kotlinx.android.synthetic.main.fragment_new_item.view.*
 
 class NewMovementDialog(private val newMovementFragment: NewMovementFragment): DialogFragment() {

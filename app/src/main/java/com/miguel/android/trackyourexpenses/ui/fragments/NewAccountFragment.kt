@@ -1,9 +1,8 @@
-package com.miguel.android.trackyourexpenses.ui
+package com.miguel.android.trackyourexpenses.ui.fragments
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -19,7 +18,7 @@ import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
 import com.miguel.android.trackyourexpenses.databinding.FragmentNewAccountBinding
 import com.miguel.android.trackyourexpenses.common.InjectorUtils
-import com.miguel.android.trackyourexpenses.ui.viewmodel.NewAccountViewModel
+import com.miguel.android.trackyourexpenses.viewmodel.NewAccountViewModel
 import com.pes.androidmaterialcolorpickerdialog.ColorPicker
 import kotlinx.android.synthetic.main.fragment_new_account.*
 import java.io.IOException
@@ -47,7 +46,9 @@ class NewAccountFragment : Fragment(){
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"),
+                PICK_IMAGE_REQUEST
+            )
         }
 
         binding.colorPicker.setOnClickListener {

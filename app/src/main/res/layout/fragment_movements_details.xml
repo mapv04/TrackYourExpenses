@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable name="viewmodel"
-                  type="com.miguel.android.trackyourexpenses.ui.viewmodel.MovItemViewModel"/>
+                  type="com.miguel.android.trackyourexpenses.viewmodel.MovItemViewModel"/>
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

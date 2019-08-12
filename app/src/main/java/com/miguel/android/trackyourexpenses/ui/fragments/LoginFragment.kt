@@ -1,7 +1,6 @@
-package com.miguel.android.trackyourexpenses.ui
+package com.miguel.android.trackyourexpenses.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,31 +9,22 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.miguel.android.trackyourexpenses.ui.viewmodel.LoginViewModel
+import com.miguel.android.trackyourexpenses.viewmodel.LoginViewModel
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.data.api.request.RequestLogin
-import com.miguel.android.trackyourexpenses.data.api.response.ResponseAuth
-import com.miguel.android.trackyourexpenses.data.api.retrofit.ExpensesClient
-import com.miguel.android.trackyourexpenses.data.api.retrofit.ExpensesService
 import com.miguel.android.trackyourexpenses.databinding.FragmentLoginBinding
 import com.miguel.android.trackyourexpenses.common.*
-import kotlinx.android.synthetic.main.fragment_login.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.IOException
+import com.miguel.android.trackyourexpenses.data.repository.AuthRepository
 
 
 class LoginFragment : Fragment() {
 
     private lateinit var model: LoginViewModel
     private lateinit var binding: FragmentLoginBinding
-    lateinit var expensesService: ExpensesService
-    lateinit var expensesClient: ExpensesClient
+    private val repository = AuthRepository()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -48,35 +38,24 @@ class LoginFragment : Fragment() {
 
         model.user.observe(this, Observer {
             val requestLogin = RequestLogin(it.username, it.password)
-            val call = expensesService.doLogin(requestLogin)
 
-            call.enqueue(object: Callback<ResponseAuth> {
-                override fun onResponse(call: Call<ResponseAuth>, response: Response<ResponseAuth>) {
-                    if(response.isSuccessful){
-                        SharedPreferencesManager.setSomeStringValue(PREF_TOKEN, response.body()?.token.toString())
-                        SharedPreferencesManager.setSomeStringValue(PREF_NAME, response.body()?.name.toString() + " " + response.body()?.lastname.toString())
-                        SharedPreferencesManager.setSomeStringValue(PREF_USERNAME, response.body()?.username.toString())
-                        view?.findNavController()?.navigate(R.id.action_loginFragment_to_accountActivity)
-                        activity?.finish()
-                    }
-                    else{
-                        Toast.makeText(activity, response.body()?.message.toString(), Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<ResponseAuth>, t: Throwable) {
-                    if (t is IOException) {
-                        Toast.makeText(activity, R.string.check_network_connection, Toast.LENGTH_SHORT).show()
-                        Log.d(TAG, "Exception: ${t}")
-                    }
-                    else {
-                        Toast.makeText(activity, "conversion issue! big problems :(", Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-            })
+            model.doLogin(requestLogin)
 
         })
+
+        model.responseLogin.observe(this, Observer{
+            when (it) {
+                200 -> {
+                    view?.findNavController()?.navigate(R.id.action_loginFragment_to_accountActivity)
+                    activity?.finish()
+                }
+                401, 404 -> {
+                    binding.mUsername.error = getText(R.string.authentication_fail)
+                }
+                else -> Toast.makeText(activity, R.string.check_network_connection, Toast.LENGTH_SHORT).show()
+            }
+        })
+
         binding.mSignUp.setOnClickListener (
             Navigation.createNavigateOnClickListener(R.id.action_loginFragment_to_registerFragment)
         )
@@ -104,18 +83,13 @@ class LoginFragment : Fragment() {
         }
 
 
-        val factory = InjectorUtils.provideLoginViewModelFactory(requireContext())
+        val factory = InjectorUtils.provideLoginViewModelFactory()
         model = activity?.run{
             ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        retrofitInit()
     }
 
-    private fun retrofitInit(){
-        expensesClient = ExpensesClient.instance
-        expensesService = expensesClient.expensesService
-    }
 
 
 

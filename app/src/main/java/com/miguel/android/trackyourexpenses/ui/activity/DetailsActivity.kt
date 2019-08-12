@@ -1,17 +1,15 @@
 package com.miguel.android.trackyourexpenses.ui.activity
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.data.ItemMov
-import com.miguel.android.trackyourexpenses.ui.AccountDetailsFragmentDirections
-import com.miguel.android.trackyourexpenses.ui.NewMovementDialog
-import com.miguel.android.trackyourexpenses.ui.NewMovementFragment
+import com.miguel.android.trackyourexpenses.ui.fragments.NewMovementDialog
+import com.miguel.android.trackyourexpenses.ui.fragments.NewMovementFragment
 import com.miguel.android.trackyourexpenses.ui.OnMovementSelected
-import kotlinx.android.synthetic.main.navhost_details.*
+import com.miguel.android.trackyourexpenses.ui.fragments.AccountDetailsFragmentDirections
 
 class DetailsActivity: AppCompatActivity(), NewMovementDialog.OnItemListListener,
     OnMovementSelected {

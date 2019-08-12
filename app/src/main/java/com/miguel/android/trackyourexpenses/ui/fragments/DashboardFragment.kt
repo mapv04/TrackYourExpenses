@@ -1,4 +1,4 @@
-package com.miguel.android.trackyourexpenses.ui
+package com.miguel.android.trackyourexpenses.ui.fragments
 
 import android.content.Context
 import android.graphics.Canvas
@@ -19,11 +19,10 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.common.InjectorUtils
 import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
-import com.miguel.android.trackyourexpenses.ui.viewmodel.DashboardViewModel
+import com.miguel.android.trackyourexpenses.viewmodel.DashboardViewModel
 import kotlinx.android.synthetic.main.fragment_account_list.*
 import kotlinx.android.synthetic.main.fragment_account_list.view.*
 import kotlinx.android.synthetic.main.fragment_account_list.view.swipeRefresh

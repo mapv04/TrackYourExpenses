@@ -1,4 +1,4 @@
-package com.miguel.android.trackyourexpenses.ui
+package com.miguel.android.trackyourexpenses.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,7 +15,7 @@ import com.miguel.android.trackyourexpenses.data.api.request.RequestSignUp
 import com.miguel.android.trackyourexpenses.data.api.response.ResponseAuth
 import com.miguel.android.trackyourexpenses.data.api.retrofit.ExpensesClient
 import com.miguel.android.trackyourexpenses.data.api.retrofit.ExpensesService
-import com.miguel.android.trackyourexpenses.ui.viewmodel.RegisterViewModel
+import com.miguel.android.trackyourexpenses.viewmodel.RegisterViewModel
 import com.miguel.android.trackyourexpenses.databinding.FragmentRegisterBinding
 import com.miguel.android.trackyourexpenses.common.*
 import retrofit2.Call

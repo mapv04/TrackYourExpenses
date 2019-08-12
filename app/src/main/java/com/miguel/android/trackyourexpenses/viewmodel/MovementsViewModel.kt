@@ -1,10 +1,9 @@
-package com.miguel.android.trackyourexpenses.ui.viewmodel
+package com.miguel.android.trackyourexpenses.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.miguel.android.trackyourexpenses.data.api.response.Movements
 import com.miguel.android.trackyourexpenses.data.repository.AccountActivityRepository
-import com.miguel.android.trackyourexpenses.ui.RecyclerViewIncomes
 
 class MovementsViewModel: ViewModel() {
     private val repository = AccountActivityRepository()

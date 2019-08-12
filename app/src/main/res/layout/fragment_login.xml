@@ -3,7 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="viewmodel"
-                  type="com.miguel.android.trackyourexpenses.ui.viewmodel.LoginViewModel"/>
+                  type="com.miguel.android.trackyourexpenses.viewmodel.LoginViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

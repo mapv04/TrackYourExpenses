@@ -1,4 +1,4 @@
-package com.miguel.android.trackyourexpenses.ui.viewmodel
+package com.miguel.android.trackyourexpenses.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.miguel.android.trackyourexpenses.data.database.entity.Accounts

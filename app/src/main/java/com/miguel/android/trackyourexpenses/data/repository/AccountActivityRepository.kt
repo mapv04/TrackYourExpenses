@@ -7,7 +7,7 @@ import com.miguel.android.trackyourexpenses.data.api.request.RequestMov
 import com.miguel.android.trackyourexpenses.data.api.response.Movements
 import com.miguel.android.trackyourexpenses.data.api.retrofit.AuthExpensesClient
 import com.miguel.android.trackyourexpenses.data.api.retrofit.AuthExpensesService
-import com.miguel.android.trackyourexpenses.ui.AccountDetailsFragment
+import com.miguel.android.trackyourexpenses.ui.fragments.AccountDetailsFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

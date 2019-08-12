@@ -7,7 +7,7 @@
             app:startDestination="@id/dashboardFragment">
 
     <fragment android:id="@+id/dashboardFragment"
-              android:name="com.miguel.android.trackyourexpenses.ui.DashboardFragment"
+              android:name="com.miguel.android.trackyourexpenses.ui.fragments.DashboardFragment"
               android:label="DashboardFragment"
               tools:layout="@layout/fragment_account_list">
         <action android:id="@+id/action_dashboardFragment_to_newAccountFragment"
@@ -16,7 +16,7 @@
     </fragment>
 
     <fragment android:id="@+id/newAccountFragment"
-              android:name="com.miguel.android.trackyourexpenses.ui.NewAccountFragment"
+              android:name="com.miguel.android.trackyourexpenses.ui.fragments.NewAccountFragment"
               android:label="NewAccountFragment"
               tools:layout="@layout/fragment_new_account">
         <action android:id="@+id/action_newAccountFragment_to_dashboardFragment"

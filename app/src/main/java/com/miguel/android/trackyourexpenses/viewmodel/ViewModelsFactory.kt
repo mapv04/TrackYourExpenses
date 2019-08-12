@@ -1,19 +1,15 @@
-package com.miguel.android.trackyourexpenses.ui.viewmodel
+package com.miguel.android.trackyourexpenses.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import com.miguel.android.trackyourexpenses.data.repository.AccountActivityRepository
 import com.miguel.android.trackyourexpenses.data.repository.AccountRepository
 import com.miguel.android.trackyourexpenses.data.repository.UserRepository
 
-class LoginViewModelFactory(
-    private val repository: UserRepository
-): ViewModelProvider.NewInstanceFactory() {
+class LoginViewModelFactory: ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return LoginViewModel(repository) as T
+        return LoginViewModel() as T
     }
 }
 
