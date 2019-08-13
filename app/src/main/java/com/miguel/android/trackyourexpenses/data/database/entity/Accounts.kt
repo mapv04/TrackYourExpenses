@@ -15,7 +15,6 @@ data class Accounts(
     val id: String,
     val name: String,
     val color: Int?,
-    val imageLocation: String?,
     val lastUpdate: String,
     @ColumnInfo(index = true)
     val userId: String

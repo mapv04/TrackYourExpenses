@@ -12,9 +12,6 @@ class RequestAccount(account: Accounts) {
     @SerializedName("color")
     @Expose
     private val color: Int? = account.color
-    @SerializedName("imageLocation")
-    @Expose
-    private val imageLocation: String? = account.imageLocation
     @SerializedName("lastUpdate")
     @Expose
     private val lastUpdate: String = account.lastUpdate

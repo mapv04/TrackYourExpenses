@@ -42,15 +42,6 @@ class NewAccountFragment : Fragment(){
             this.lifecycleOwner = this@NewAccountFragment
         }
 
-        binding.addImage.setOnClickListener {
-            val intent = Intent()
-            intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"),
-                PICK_IMAGE_REQUEST
-            )
-        }
-
         binding.colorPicker.setOnClickListener {
             val colorPicker = ColorPicker(activity)
             colorPicker.show()
@@ -60,8 +51,6 @@ class NewAccountFragment : Fragment(){
                 val red = Color.red(color)
                 val green = Color.green(color)
                 val blue = Color.blue(color)
-               /* val gradient: GradientDrawable = it.background.mutate() as GradientDrawable
-                gradient.setColor(Color.argb(alpha, red, green, blue))*/
                 it.setBackgroundColor(Color.argb(alpha, red, green, blue))
                 gradientColor = Color.argb(alpha, red, green, blue)
             }
@@ -73,14 +62,13 @@ class NewAccountFragment : Fragment(){
                             Accounts("",
                                 it.toString(),
                                 gradientColor,
-                                imageLocation, LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString(),
+                                LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString(),
                                 ""
                             )
                         } else {
                             Accounts("",
                                 it.toString(),
                                 gradientColor,
-                                imageLocation,
                                 SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time),
                                 ""
                             )
@@ -106,27 +94,6 @@ class NewAccountFragment : Fragment(){
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null){
-            val uri = data.data
-            Log.d(TAG, "URI DATA: $uri")
-            try{
-                val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, uri)
-                addImage.setImageBitmap(bitmap)
-                imageLocation = uri.toString()
 
-            }catch(e: IOException){
-                Log.e(TAG, "Error onActivityResult: ",e)
-            }
-        }
-    }
-
-    companion object{
-        const val EXTRA_USER_ID = "com.miguel.android.moneymanager.ui.user_id"
-        private const val PICK_IMAGE_REQUEST = 1
-        private const val TAG = "NewAccountFragment"
-        fun newInstance() = NewAccountFragment()
-    }
 
 }
