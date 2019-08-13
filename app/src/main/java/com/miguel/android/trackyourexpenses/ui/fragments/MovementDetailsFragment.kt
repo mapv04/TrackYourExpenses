@@ -16,6 +16,8 @@ import com.miguel.android.trackyourexpenses.common.InjectorUtils
 import com.miguel.android.trackyourexpenses.repository.MovementRepository
 import com.miguel.android.trackyourexpenses.databinding.FragmentMovementsDetailsBinding
 import com.miguel.android.trackyourexpenses.viewmodel.MovItemViewModel
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class MovementDetailsFragment: Fragment() {
 
@@ -29,15 +31,11 @@ class MovementDetailsFragment: Fragment() {
 
         movementId = args.movementId
 
-        val factory = if(args.movementType == "income"){
-            InjectorUtils.provideMovIncomeViewModelFactory()
-        }else{
-            InjectorUtils.provideMovExpenseViewModelFactory()
-        }
 
         model = activity?.run {
-            ViewModelProviders.of(this, factory).get(MovItemViewModel::class.java)
+            ViewModelProviders.of(this).get(MovItemViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
+
 
     }
 
@@ -49,7 +47,9 @@ class MovementDetailsFragment: Fragment() {
             this.viewmodel = model
         }
 
-        model.movement?.observe(this, Observer {movement ->
+
+
+        model.movement.observe(this, Observer {movement ->
             movement.movs?.let{
                 for (item in it){
                     val newTextView = TextView(activity)
@@ -62,6 +62,12 @@ class MovementDetailsFragment: Fragment() {
             }
         })
 
+        if(args.movementType == "income"){
+            model.getIncomeData()
+        }
+        else{
+            model.getExpenseData()
+        }
 
 
         return binding.root

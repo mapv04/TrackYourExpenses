@@ -33,18 +33,6 @@ class DashboardViewModelFactory(
     }
 }
 
-class MovIncomeViewModelFactory: ViewModelProvider.NewInstanceFactory(){
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return MovItemViewModel("income") as T
-    }
-}
 
-class MovExpenseViewModelFactory: ViewModelProvider.NewInstanceFactory() {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return MovItemViewModel("expense") as T
-    }
-}
 
 

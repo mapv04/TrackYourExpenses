@@ -6,6 +6,7 @@ import com.miguel.android.trackyourexpenses.data.api.response.Account
 import com.miguel.android.trackyourexpenses.data.api.response.AccountDeleted
 import com.miguel.android.trackyourexpenses.data.api.response.Movements
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 interface AuthExpensesService {
@@ -31,10 +32,10 @@ interface AuthExpensesService {
     fun getAllExpenses(@Path("id") accountId: String): Call<List<Movements>>
 
     @GET("api/user/accounts/incomes/income/{id}")
-    fun getIncome(@Path("id") incomeId: String): Call<Movements>
+    suspend fun getIncome(@Path("id") incomeId: String): Response<Movements>
 
     @GET("api/user/accounts/expenses/expense/{id}")
-    fun getExpense(@Path("id") expenseId: String): Call<Movements>
+    suspend fun getExpense(@Path("id") expenseId: String): Response<Movements>
 
     @PUT("api/user/accounts/updateAccount/{id}")
     fun updateAccount(@Path("id") accountId: String, @Body requestAccount: RequestAccount)

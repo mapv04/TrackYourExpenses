@@ -16,7 +16,6 @@ object InjectorUtils{
     }
 
 
-
     fun provideLoginViewModelFactory(): LoginViewModelFactory {
         return LoginViewModelFactory()
     }
@@ -32,12 +31,6 @@ object InjectorUtils{
         return DashboardViewModelFactory(repository)
     }
 
-    fun provideMovIncomeViewModelFactory(): MovIncomeViewModelFactory{
-        return MovIncomeViewModelFactory()
-    }
 
-    fun provideMovExpenseViewModelFactory(): MovExpenseViewModelFactory{
-        return MovExpenseViewModelFactory()
-    }
 
 }

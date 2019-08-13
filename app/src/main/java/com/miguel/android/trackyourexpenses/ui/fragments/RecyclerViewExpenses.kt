@@ -107,6 +107,7 @@ class RecyclerViewExpenses: Fragment() {
             private lateinit var mExpense: Expense
 
             init{
+                itemView.setOnClickListener(this)
                 mExpenseName = itemView.findViewById(R.id.movementName)
                 mExpenseDate = itemView.findViewById(R.id.movementDate)
                 mExpenseTotal = itemView.findViewById(R.id.movementTotal)
