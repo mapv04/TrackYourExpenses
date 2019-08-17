@@ -10,6 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.common.InjectorUtils
@@ -45,6 +47,10 @@ class MovementDetailsFragment: Fragment() {
         binding.apply {
             this.lifecycleOwner = this@MovementDetailsFragment
             this.viewmodel = model
+        }
+
+        binding.btnOk.setOnClickListener {
+            Navigation.createNavigateOnClickListener(R.id.action_movementDetailsFragment_to_accountDetailsFragment)
         }
 
 

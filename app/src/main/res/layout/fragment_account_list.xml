@@ -8,7 +8,8 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefresh"
             android:layout_height="match_parent"
-            android:layout_width="match_parent">
+            android:layout_width="match_parent"
+            android:backgroundTint="@color/primaryColor" >
 
 <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mRecyclerView"

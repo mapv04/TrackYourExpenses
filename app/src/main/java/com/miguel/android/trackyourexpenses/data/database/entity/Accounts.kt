@@ -14,7 +14,7 @@ data class Accounts(
     @PrimaryKey
     val id: String,
     val name: String,
-    val color: Int?,
+    val color: Int,
     val lastUpdate: String,
     @ColumnInfo(index = true)
     val userId: String

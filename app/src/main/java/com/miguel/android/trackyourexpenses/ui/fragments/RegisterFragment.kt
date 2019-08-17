@@ -33,6 +33,8 @@ class RegisterFragment: Fragment() {
 
 
         model.responseRegister.observe(this, Observer {
+            binding.registerButton.isEnabled = true
+            loading.visibility = View.GONE
             when(it){
                 201 -> view?.findNavController()?.navigate(R.id.action_registerFragment_to_loginFragment)
                 409 -> binding.usernameEditText.error = getString(R.string.user_exists)
@@ -41,15 +43,31 @@ class RegisterFragment: Fragment() {
         })
 
         binding.registerButton.setOnClickListener {
-            val user = User("",
-                binding.nameEditText.text.toString(),
-                binding.lastnameEditText.text.toString(),
-                binding.usernameEditText.text.toString(),
-                binding.emailEditText.text.toString(),
-                binding.passwordEditText.text.toString()
+            val name = nameEditText.text.toString()
+            val lName = lastnameEditText.text.toString()
+            val username = usernameEditText.text.toString()
+            val email = emailEditText.text.toString()
+            val password = passwordEditText.text.toString()
+            if(!name.isNullOrEmpty() &&
+                !lName.isNullOrEmpty() &&
+                !username.isNullOrEmpty() &&
+                !email.isNullOrEmpty() &&
+                !password.isNullOrEmpty()){
+                it.isEnabled = false
+                loading.visibility = View.VISIBLE
+                val user = User("",
+                    name,
+                    lName,
+                    username,
+                    email,
+                    password
                 )
 
-            model.register(RequestSignUp(user))
+                model.register(RequestSignUp(user))
+            } else {
+                Toast.makeText(activity, R.string.enter_all_values, Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         return binding.root

@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity(){
 
         setContentView(R.layout.navhost)
 
+        findNavController(R.id.myNavHostFragment).setGraph(R.navigation.navigation_auth)
+
     }
 
 

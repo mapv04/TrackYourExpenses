@@ -15,23 +15,8 @@ class LoginViewModel: ViewModel() {
     private val repository = AuthRepository()
     val editTextUsername = MutableLiveData<String>()
     val editTextPassword = MutableLiveData<String>()
+
     var responseLogin = MutableLiveData<Int>()
-
-    class UserLogin(val username: String, val password:String)
-    private val _user = MutableLiveData<UserLogin>()
-
-    val user: LiveData<UserLogin>
-        get() = _user
-
-
-
-    fun onLoginButtonClick(){
-        if(editTextUsername.value != null && editTextPassword.value != null) {
-            val user = UserLogin(editTextUsername.value!!, editTextPassword.value!!)
-            _user.value = user
-        }
-    }
-
 
 
     fun doLogin(requestLogin: RequestLogin){

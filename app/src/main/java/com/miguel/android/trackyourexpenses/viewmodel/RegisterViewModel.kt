@@ -14,6 +14,11 @@ class RegisterViewModel(
 
     val responseRegister = MutableLiveData<Int>()
     private val repository = AuthRepository()
+    val editTextName = MutableLiveData<String>()
+    val editTextLName = MutableLiveData<String>()
+    val editTextUsername = MutableLiveData<String>()
+    val editTextEmail = MutableLiveData<String>()
+    val editTextPassword = MutableLiveData<String>()
 
 
     fun register(requestRegister: RequestSignUp){

@@ -32,7 +32,6 @@ class NewAccountFragment : Fragment(){
 
     private lateinit var model: NewAccountViewModel
     private lateinit var  binding: FragmentNewAccountBinding
-    private var imageLocation = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var gradientColor = 0
@@ -40,6 +39,31 @@ class NewAccountFragment : Fragment(){
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_new_account, container, false)
         binding.apply {
             this.lifecycleOwner = this@NewAccountFragment
+        }
+
+        binding.save.setOnClickListener {
+            binding.title.text.let{
+                if (it.isNotBlank()){
+                    val newAccount = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        Accounts("",
+                            it.toString(),
+                            gradientColor,
+                            LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString(),
+                            ""
+                        )
+                    } else {
+                        Accounts("",
+                            it.toString(),
+                            gradientColor,
+                            SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time),
+                            ""
+                        )
+                    }
+                    model.addNewAccount(newAccount)
+
+                    view?.findNavController()?.navigate(R.id.action_newAccountFragment_to_dashboardFragment)
+                }
+            }
         }
 
         binding.colorPicker.setOnClickListener {
@@ -55,30 +79,7 @@ class NewAccountFragment : Fragment(){
                 gradientColor = Color.argb(alpha, red, green, blue)
             }
 
-            binding.save.setOnClickListener {
-                binding.title.text.let{
-                    if (it.isNotBlank()){
-                        val newAccount = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            Accounts("",
-                                it.toString(),
-                                gradientColor,
-                                LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString(),
-                                ""
-                            )
-                        } else {
-                            Accounts("",
-                                it.toString(),
-                                gradientColor,
-                                SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time),
-                                ""
-                            )
-                        }
-                        model.addNewAccount(newAccount)
 
-                        view?.findNavController()?.navigate(R.id.action_newAccountFragment_to_dashboardFragment)
-                    }
-                }
-            }
 
         }
 

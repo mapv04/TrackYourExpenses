@@ -9,7 +9,6 @@
         
         <!--<item name="editTextColor">@style/Text</item>-->
         <item name="materialButtonStyle">@style/Buttons</item>
-
     </style>
     <!-- Base application theme. -->
 
@@ -34,6 +33,10 @@
     <style name="FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="backgroundTint">@color/secondaryDarkColor</item>
         <item name="elevation">5dp</item>
+    </style>
+
+    <style name="ProgressBarStyle" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:indeterminateTint">@color/primaryColor</item>
     </style>
 
 

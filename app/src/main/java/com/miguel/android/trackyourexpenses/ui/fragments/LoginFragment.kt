@@ -18,13 +18,13 @@ import com.miguel.android.trackyourexpenses.data.api.request.RequestLogin
 import com.miguel.android.trackyourexpenses.databinding.FragmentLoginBinding
 import com.miguel.android.trackyourexpenses.common.*
 import com.miguel.android.trackyourexpenses.repository.AuthRepository
+import kotlinx.android.synthetic.main.fragment_login.*
 
 
 class LoginFragment : Fragment() {
 
     private lateinit var model: LoginViewModel
     private lateinit var binding: FragmentLoginBinding
-    private val repository = AuthRepository()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -36,14 +36,26 @@ class LoginFragment : Fragment() {
             this.viewmodel = model
         }
 
-        model.user.observe(this, Observer {
-            val requestLogin = RequestLogin(it.username, it.password)
+        binding.mLogin.setOnClickListener {
+            val username = mUsername.text.toString()
+            val password = mPassword.text.toString()
 
-            model.doLogin(requestLogin)
+            if(!username.isNullOrEmpty() && !password.isNullOrEmpty()){
+                val requestLogin = RequestLogin(username, password)
+                it.isEnabled = false
+                loading.visibility = View.VISIBLE
+                model.doLogin(requestLogin)
+            }
+            else{
+                Toast.makeText(activity, R.string.enter_all_values, Toast.LENGTH_SHORT).show()
 
-        })
+            }
+        }
+
 
         model.responseLogin.observe(this, Observer{
+            binding.mLogin.isEnabled = true
+            loading.visibility = View.GONE
             when (it) {
                 200 -> {
                     view?.findNavController()?.navigate(R.id.action_loginFragment_to_accountActivity)
@@ -91,10 +103,4 @@ class LoginFragment : Fragment() {
     }
 
 
-
-
-    companion object{
-        private const val TAG = "LoginFragment"
-        const val EXTRA_USER_ID = "com.miguel.android.moneymanager.ui.activity.user_id"
-    }
 }

@@ -225,8 +225,8 @@ class DashboardFragment : Fragment() {
 
             fun bind(account: Accounts){
                 mAccount = account
-                mAccount.color?.let{
-                    mCardView?.setCardBackgroundColor(it)
+                if(mAccount.color != 0){
+                    mCardView?.setCardBackgroundColor(mAccount.color)
                 }
                 mTitle?.text = mAccount.name
                 mLastUpdate?.text = mAccount.lastUpdate
