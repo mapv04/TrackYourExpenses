@@ -1,6 +1,5 @@
 package com.miguel.android.trackyourexpenses.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,9 +9,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class LoginViewModel: ViewModel() {
+class LoginViewModel (private val repository: AuthRepository): ViewModel() {
 
-    private val repository = AuthRepository()
+    //private val repository: AuthRepository
     val editTextUsername = MutableLiveData<String>()
     val editTextPassword = MutableLiveData<String>()
 

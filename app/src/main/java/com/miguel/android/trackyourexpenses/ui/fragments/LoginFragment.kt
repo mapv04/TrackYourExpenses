@@ -19,6 +19,7 @@ import com.miguel.android.trackyourexpenses.databinding.FragmentLoginBinding
 import com.miguel.android.trackyourexpenses.common.*
 import com.miguel.android.trackyourexpenses.repository.AuthRepository
 import kotlinx.android.synthetic.main.fragment_login.*
+import javax.inject.Inject
 
 
 class LoginFragment : Fragment() {
@@ -26,6 +27,8 @@ class LoginFragment : Fragment() {
     private lateinit var model: LoginViewModel
     private lateinit var binding: FragmentLoginBinding
 
+    @Inject
+    lateinit var repository: AuthRepository
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -88,6 +91,7 @@ class LoginFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        (activity?.application as MyApp).getComponent().getAuthRepository(this)
 
         if(SharedPreferencesManager.getSomeBoolValue(PREF_KEEP_LOGIN)){
             //Keep Login
@@ -95,7 +99,7 @@ class LoginFragment : Fragment() {
         }
 
 
-        val factory = InjectorUtils.provideLoginViewModelFactory()
+        val factory = InjectorUtils.provideLoginViewModelFactory(repository)
         model = activity?.run{
             ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
         } ?: throw Exception("Invalid Activity")

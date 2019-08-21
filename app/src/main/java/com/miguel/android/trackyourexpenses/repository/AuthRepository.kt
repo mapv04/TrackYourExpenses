@@ -11,16 +11,17 @@ import com.miguel.android.trackyourexpenses.data.api.retrofit.ExpensesClient
 import com.miguel.android.trackyourexpenses.data.api.retrofit.ExpensesService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 
-class AuthRepository {
+class AuthRepository (private val expensesService: ExpensesService) {
 
-    private val expensesService: ExpensesService
+    /*private val expensesService: ExpensesService
     private val expensesClient: ExpensesClient = ExpensesClient.instance
 
     init{
         expensesService = expensesClient.expensesService
-    }
+    }*/
 
     suspend fun login(requestLogin: RequestLogin): Int {
         try {
