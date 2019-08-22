@@ -19,7 +19,6 @@ class AccountRepository(private val authExpenseService: AuthExpensesService) {
 
 
     init{
-        //authExpenseService = authExpensesClient.expensesService
         allAccounts = getAllAccounts()
     }
 

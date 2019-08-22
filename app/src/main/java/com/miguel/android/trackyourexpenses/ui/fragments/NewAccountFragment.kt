@@ -34,7 +34,7 @@ import javax.inject.Inject
 class NewAccountFragment : Fragment(){
 
     @Inject
-    private lateinit var repository: AccountRepository
+    lateinit var repository: AccountRepository
 
     private lateinit var model: NewAccountViewModel
     private lateinit var  binding: FragmentNewAccountBinding

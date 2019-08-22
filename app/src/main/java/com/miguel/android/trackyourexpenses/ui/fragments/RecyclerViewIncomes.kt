@@ -25,7 +25,7 @@ import javax.inject.Inject
 class RecyclerViewIncomes: Fragment() {
 
     @Inject
-    private lateinit var repository: AccountActivityRepository
+    lateinit var repository: AccountActivityRepository
 
     private lateinit var model: MovementsViewModel
     private lateinit var incomeAdapter: IncomeAdapter

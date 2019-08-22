@@ -26,7 +26,7 @@ import javax.inject.Inject
 class MovementDetailsFragment: Fragment() {
 
     @Inject
-    private lateinit var repository: MovementRepository
+    lateinit var repository: MovementRepository
 
     private val args: MovementDetailsFragmentArgs by navArgs()
     private lateinit var model: MovItemViewModel

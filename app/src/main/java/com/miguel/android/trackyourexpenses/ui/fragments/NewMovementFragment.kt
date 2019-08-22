@@ -32,7 +32,7 @@ import javax.inject.Inject
 class NewMovementFragment: Fragment() {
 
     @Inject
-    private lateinit var repository: AccountActivityRepository
+    lateinit var repository: AccountActivityRepository
 
     private lateinit var model: MovementsViewModel
     private val args: NewMovementFragmentArgs by navArgs()

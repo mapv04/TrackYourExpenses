@@ -34,7 +34,7 @@ import javax.inject.Inject
 class DashboardFragment : Fragment() {
 
     @Inject
-    private lateinit var repository: AccountRepository
+    lateinit var repository: AccountRepository
 
     private lateinit var model: DashboardViewModel
     private lateinit var accountAdapter: AccountAdapter
