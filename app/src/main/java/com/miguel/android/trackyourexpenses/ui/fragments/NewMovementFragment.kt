@@ -8,17 +8,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.miguel.android.trackyourexpenses.R
+import com.miguel.android.trackyourexpenses.common.InjectorUtils
+import com.miguel.android.trackyourexpenses.common.MyApp
 import com.miguel.android.trackyourexpenses.data.ItemMov
 import com.miguel.android.trackyourexpenses.data.Movs
 import com.miguel.android.trackyourexpenses.repository.AccountActivityRepository
+import com.miguel.android.trackyourexpenses.viewmodel.MovementsViewModel
 import kotlinx.android.synthetic.main.fragment_new_movement.view.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
+import javax.inject.Inject
 
 /**
  * This fragment is to create expenses and incomes
@@ -26,10 +31,26 @@ import java.util.*
 
 class NewMovementFragment: Fragment() {
 
+    @Inject
+    private lateinit var repository: AccountActivityRepository
+
+    private lateinit var model: MovementsViewModel
     private val args: NewMovementFragmentArgs by navArgs()
     private val previousArgs: AccountDetailsFragmentArgs by navArgs()
 
     var itemList = mutableListOf<ItemMov>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        (activity?.application as MyApp).getComponent().getAccountActivityRepository(this)
+
+        val factory = InjectorUtils.provideMovementsViewModelFactory(repository)
+
+        model = activity?.run {
+            ViewModelProviders.of(this, factory).get(MovementsViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -45,7 +66,6 @@ class NewMovementFragment: Fragment() {
         }
 
         view.btnSave.setOnClickListener {
-            val repository = AccountActivityRepository()
             val name = view.movName.text.toString()
             val description = view.movDescription.text.toString()
 
@@ -61,8 +81,8 @@ class NewMovementFragment: Fragment() {
             val movs = Movs(name, description, date, total, itemList)
 
             when(args.option){
-                "income" -> repository.createNewIncome(movs)
-                "expense" -> repository.createNewExpense(movs)
+                "income" -> model.createNewIncome(movs)
+                "expense" -> model.createNewExpense(movs)
                 else -> throw UnselectedMovementTypeException()
             }
 

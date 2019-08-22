@@ -13,12 +13,19 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miguel.android.trackyourexpenses.R
+import com.miguel.android.trackyourexpenses.common.InjectorUtils
+import com.miguel.android.trackyourexpenses.common.MyApp
 import com.miguel.android.trackyourexpenses.data.database.entity.Expense
+import com.miguel.android.trackyourexpenses.repository.AccountActivityRepository
 import com.miguel.android.trackyourexpenses.ui.OnMovementSelected
 import com.miguel.android.trackyourexpenses.viewmodel.MovementsViewModel
 import kotlinx.android.synthetic.main.fragment_expenses_list.view.*
+import javax.inject.Inject
 
 class RecyclerViewExpenses: Fragment() {
+
+    @Inject
+    private lateinit var repository: AccountActivityRepository
 
     private lateinit var model: MovementsViewModel
     private lateinit var expenseAdapter: ExpenseAdapter
@@ -38,8 +45,12 @@ class RecyclerViewExpenses: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        (activity?.application as MyApp).getComponent().getAccountActivityRepository(this)
+
+        val factory = InjectorUtils.provideMovementsViewModelFactory(repository)
+
         model = activity?.run {
-            ViewModelProviders.of(this).get(MovementsViewModel::class.java)
+            ViewModelProviders.of(this, factory).get(MovementsViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
     }
 

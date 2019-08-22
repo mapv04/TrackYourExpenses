@@ -12,15 +12,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AccountActivityRepository{
+class AccountActivityRepository(private val authExpenseService: AuthExpensesService){
 
     private var allIncomes: MutableLiveData<List<Movements>>?
     private var allExpenses: MutableLiveData<List<Movements>>?
-    private val authExpenseService: AuthExpensesService
-    private val authExpensesClient: AuthExpensesClient = AuthExpensesClient.instance
 
     init{
-        authExpenseService = authExpensesClient.expensesService
         allIncomes = getAllIncomes()
         allExpenses = getAllExpenses()
     }

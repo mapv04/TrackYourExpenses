@@ -2,8 +2,10 @@ package com.miguel.android.trackyourexpenses.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.miguel.android.trackyourexpenses.repository.AccountActivityRepository
 import com.miguel.android.trackyourexpenses.repository.AccountRepository
 import com.miguel.android.trackyourexpenses.repository.AuthRepository
+import com.miguel.android.trackyourexpenses.repository.MovementRepository
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -27,6 +29,14 @@ class RegisterViewModelFactory(
     }
 }
 
+class DashboardViewModelFactory(
+    private val repository: AccountRepository): ViewModelProvider.NewInstanceFactory() {
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return DashboardViewModel(repository) as T
+    }
+}
 
 class NewAccountViewModelFactory(
     private val repository: AccountRepository
@@ -38,15 +48,24 @@ class NewAccountViewModelFactory(
     }
 }
 
-
-class DashboardViewModelFactory(
-    private val repository: AccountRepository): ViewModelProvider.NewInstanceFactory() {
-
+class MovementsViewModelFactory(
+    private val repository: AccountActivityRepository
+): ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return DashboardViewModel(repository) as T
+        return MovementsViewModel(repository) as T
     }
 }
+
+class MovItemViewModelFactory(
+    private val repository: MovementRepository
+): ViewModelProvider.Factory {
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return MovItemViewModel(repository) as T
+    }
+}
+
 
 
 

@@ -18,6 +18,8 @@ import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
 import com.miguel.android.trackyourexpenses.databinding.FragmentNewAccountBinding
 import com.miguel.android.trackyourexpenses.common.InjectorUtils
+import com.miguel.android.trackyourexpenses.common.MyApp
+import com.miguel.android.trackyourexpenses.repository.AccountRepository
 import com.miguel.android.trackyourexpenses.viewmodel.NewAccountViewModel
 import com.pes.androidmaterialcolorpickerdialog.ColorPicker
 import kotlinx.android.synthetic.main.fragment_new_account.*
@@ -27,8 +29,12 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
+import javax.inject.Inject
 
 class NewAccountFragment : Fragment(){
+
+    @Inject
+    private lateinit var repository: AccountRepository
 
     private lateinit var model: NewAccountViewModel
     private lateinit var  binding: FragmentNewAccountBinding
@@ -88,7 +94,10 @@ class NewAccountFragment : Fragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val factory = InjectorUtils.provideNewAccountViewModelFactory(requireContext())
+
+        (activity?.application as MyApp).getComponent().getAccountRepository(this)
+
+        val factory = InjectorUtils.provideNewAccountViewModelFactory(repository)
         model = activity?.run{
             ViewModelProviders.of(this, factory).get(NewAccountViewModel::class.java)
         } ?: throw Exception("Invalid activity")

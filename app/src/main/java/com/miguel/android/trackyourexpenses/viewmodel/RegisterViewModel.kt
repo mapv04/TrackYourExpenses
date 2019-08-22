@@ -12,7 +12,6 @@ import kotlinx.coroutines.launch
 class RegisterViewModel (private val repository: AuthRepository) : ViewModel() {
 
     val responseRegister = MutableLiveData<Int>()
-    //private val repository = AuthRepository()
     val editTextName = MutableLiveData<String>()
     val editTextLName = MutableLiveData<String>()
     val editTextUsername = MutableLiveData<String>()

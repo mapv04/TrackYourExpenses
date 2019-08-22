@@ -1,41 +1,23 @@
 package com.miguel.android.trackyourexpenses.common
 
-import android.content.Context
-import com.miguel.android.trackyourexpenses.data.database.MoneyManagerRoomDB
+import com.miguel.android.trackyourexpenses.repository.AccountActivityRepository
 import com.miguel.android.trackyourexpenses.repository.AccountRepository
 import com.miguel.android.trackyourexpenses.repository.AuthRepository
+import com.miguel.android.trackyourexpenses.repository.MovementRepository
 import com.miguel.android.trackyourexpenses.viewmodel.*
 
 object InjectorUtils{
 
+    fun provideLoginViewModelFactory(repository: AuthRepository) = LoginViewModelFactory(repository)
 
+    fun provideRegisterViewModelFactory(repository: AuthRepository) = RegisterViewModelFactory(repository)
 
-    private fun getAccountRepository(context: Context): AccountRepository{
-        return AccountRepository.getInstance(
-            MoneyManagerRoomDB.getDatabase(context.applicationContext).accountDao()
-        )
-    }
+    fun provideNewAccountViewModelFactory(repository: AccountRepository) = NewAccountViewModelFactory(repository)
 
+    fun provideDashboardViewModelFactory(repository: AccountRepository) = DashboardViewModelFactory(repository)
 
-    fun provideLoginViewModelFactory(repository: AuthRepository): LoginViewModelFactory {
-        return LoginViewModelFactory(repository)
-    }
+    fun provideMovementsViewModelFactory(repository: AccountActivityRepository) = MovementsViewModelFactory(repository)
 
-    fun provideRegisterViewModelFactory(repository: AuthRepository): RegisterViewModelFactory {
-        return RegisterViewModelFactory(repository)
-    }
-
-
-    fun provideNewAccountViewModelFactory(context: Context): NewAccountViewModelFactory{
-        val repository = getAccountRepository(context)
-        return NewAccountViewModelFactory(repository)
-    }
-
-    fun provideDashboardViewModelFactory(context: Context): DashboardViewModelFactory{
-        val repository = getAccountRepository(context)
-        return DashboardViewModelFactory(repository)
-    }
-
-
+    fun provideMovItemViewModelFactory(repository: MovementRepository) = MovItemViewModelFactory(repository)
 
 }

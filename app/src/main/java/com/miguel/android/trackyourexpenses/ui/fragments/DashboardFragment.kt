@@ -5,18 +5,14 @@ import android.database.Cursor
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -26,15 +22,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.common.InjectorUtils
+import com.miguel.android.trackyourexpenses.common.MyApp
 import com.miguel.android.trackyourexpenses.data.database.entity.Accounts
+import com.miguel.android.trackyourexpenses.repository.AccountRepository
 import com.miguel.android.trackyourexpenses.viewmodel.DashboardViewModel
-import kotlinx.android.synthetic.main.account_item.*
 import kotlinx.android.synthetic.main.fragment_account_list.*
 import kotlinx.android.synthetic.main.fragment_account_list.view.*
 import kotlinx.android.synthetic.main.fragment_account_list.view.swipeRefresh
-import java.io.File
+import javax.inject.Inject
 
 class DashboardFragment : Fragment() {
+
+    @Inject
+    private lateinit var repository: AccountRepository
 
     private lateinit var model: DashboardViewModel
     private lateinit var accountAdapter: AccountAdapter
@@ -102,10 +102,13 @@ class DashboardFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        (activity?.application as MyApp).getComponent().getAccountRepository(this)
+
         userId = activity?.intent?.extras?.getInt(EXTRA_USER_ID)
         Log.i(TAG, "Dashboard for user: $userId")
 
-        val factory = InjectorUtils.provideDashboardViewModelFactory(requireContext())
+        val factory = InjectorUtils.provideDashboardViewModelFactory(repository)
         model = activity?.run {
             ViewModelProviders.of(this, factory).get(DashboardViewModel::class.java)
         } ?: throw Exception("Invalid Activity")

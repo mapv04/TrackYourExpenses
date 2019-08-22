@@ -13,14 +13,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AccountRepository(private val accountDao: AccountsDao) {
+class AccountRepository(private val authExpenseService: AuthExpensesService) {
 
     private var allAccounts: MutableLiveData<List<Account>>?
-    private val authExpenseService: AuthExpensesService
-    private val authExpensesClient: AuthExpensesClient = AuthExpensesClient.instance
+
 
     init{
-        authExpenseService = authExpensesClient.expensesService
+        //authExpenseService = authExpensesClient.expensesService
         allAccounts = getAllAccounts()
     }
 
@@ -97,17 +96,6 @@ class AccountRepository(private val accountDao: AccountsDao) {
 
     companion object{
         private const val TAG = "AccountReposotory"
-
-        /**
-         * TODO("Delete code below")
-         */
-        @Volatile
-        private var instance: AccountRepository? = null
-
-        fun getInstance(accountDao: AccountsDao) =
-            instance ?: synchronized(this){
-                instance ?: AccountRepository(accountDao).also{ instance = it}
-            }
 
     }
 

@@ -15,27 +15,34 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.miguel.android.trackyourexpenses.R
 import com.miguel.android.trackyourexpenses.common.InjectorUtils
+import com.miguel.android.trackyourexpenses.common.MyApp
 import com.miguel.android.trackyourexpenses.repository.MovementRepository
 import com.miguel.android.trackyourexpenses.databinding.FragmentMovementsDetailsBinding
 import com.miguel.android.trackyourexpenses.viewmodel.MovItemViewModel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class MovementDetailsFragment: Fragment() {
 
+    @Inject
+    private lateinit var repository: MovementRepository
+
     private val args: MovementDetailsFragmentArgs by navArgs()
-    val repository = MovementRepository()
     private lateinit var model: MovItemViewModel
     private lateinit var binding: FragmentMovementsDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        (activity?.application as MyApp).getComponent().getMovementRepository(this)
+
         movementId = args.movementId
 
+        val factory = InjectorUtils.provideMovItemViewModelFactory(repository)
 
         model = activity?.run {
-            ViewModelProviders.of(this).get(MovItemViewModel::class.java)
+            ViewModelProviders.of(this, factory).get(MovItemViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
 

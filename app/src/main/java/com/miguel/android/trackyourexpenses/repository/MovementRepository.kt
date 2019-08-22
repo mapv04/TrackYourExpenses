@@ -10,16 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.lang.Exception
 
-class MovementRepository {
-
-    private val authExpenseService: AuthExpensesService
-    private val authExpensesClient: AuthExpensesClient = AuthExpensesClient.instance
-
-    init {
-        authExpenseService = authExpensesClient.expensesService
-    }
-
-
+class MovementRepository(private val authExpenseService: AuthExpensesService) {
 
     suspend fun getIncome(income: String): Movements?{
             val response = authExpenseService.getIncome(income)

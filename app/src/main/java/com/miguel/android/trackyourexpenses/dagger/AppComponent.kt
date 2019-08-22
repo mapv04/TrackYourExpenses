@@ -1,10 +1,6 @@
 package com.miguel.android.trackyourexpenses.dagger
 
-import com.miguel.android.trackyourexpenses.data.api.retrofit.AuthExpensesService
-import com.miguel.android.trackyourexpenses.data.api.retrofit.ExpensesService
-import com.miguel.android.trackyourexpenses.repository.AuthRepository
-import com.miguel.android.trackyourexpenses.ui.fragments.LoginFragment
-import com.miguel.android.trackyourexpenses.ui.fragments.RegisterFragment
+import com.miguel.android.trackyourexpenses.ui.fragments.*
 import dagger.Component
 import javax.inject.Singleton
 
@@ -12,9 +8,20 @@ import javax.inject.Singleton
 @Component(modules = [RepositoriesModule::class,NetworkModule::class])
 interface AppComponent {
 
-    /*fun getApiInterface(): ExpensesService
-    fun getAuthApiInterface(): AuthExpensesService*/
     fun getAuthRepository(fragment: LoginFragment)
     
     fun getAuthRepository(fragment: RegisterFragment)
+
+    fun getAccountRepository(fragment: DashboardFragment)
+
+    fun getAccountRepository(fragment: NewAccountFragment)
+
+    fun getMovementRepository(fragment: MovementDetailsFragment)
+
+    fun getAccountActivityRepository(fragment: NewMovementFragment)
+
+    fun getAccountActivityRepository(fragment: RecyclerViewIncomes)
+
+    fun getAccountActivityRepository(fragment: RecyclerViewExpenses)
+
 }

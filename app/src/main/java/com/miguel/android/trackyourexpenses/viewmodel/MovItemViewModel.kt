@@ -11,10 +11,8 @@ import com.miguel.android.trackyourexpenses.ui.fragments.MovementDetailsFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MovItemViewModel: ViewModel() {
+class MovItemViewModel(private val repository: MovementRepository): ViewModel() {
     var movement = MutableLiveData<Movements>()
-    private val repository = MovementRepository()
-
 
     fun getIncomeData(){
         viewModelScope.launch(Dispatchers.IO) {
