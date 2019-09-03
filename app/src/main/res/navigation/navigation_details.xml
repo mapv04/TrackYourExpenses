@@ -19,6 +19,9 @@ app:startDestination="@id/accountDetailsFragment">
                 app:destination="@id/movementDetailsFragment"/>
         <action android:id="@+id/action_accountDetailsFragment_to_accountActivity2"
                 app:destination="@id/accountActivity2"/>
+        <action
+                android:id="@+id/action_accountDetailsFragment_to_mainActivity2"
+                app:destination="@id/mainActivityDetails" />
     </fragment>
 
     <fragment android:id="@+id/newMovementFragment"
@@ -43,5 +46,10 @@ app:startDestination="@id/accountDetailsFragment">
               android:name="com.miguel.android.trackyourexpenses.ui.activity.AccountActivity"
               android:label="AccountActivity"
               tools:layout="@layout/navhost_account"/>
+    <activity
+            android:id="@+id/mainActivityDetails"
+            android:name="com.miguel.android.trackyourexpenses.ui.activity.MainActivity"
+            android:label="MainActivity"
+            tools:layout="@layout/navhost"/>
 
 </navigation>

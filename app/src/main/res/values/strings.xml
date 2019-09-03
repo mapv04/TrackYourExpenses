@@ -31,4 +31,5 @@
     <string name="keep_login">Keep me signed in</string>
     <string name="ok">OK</string>
     <string name="enter_all_values">Please enter all fields</string>
+    <string name="log_out">Log out</string>
 </resources>

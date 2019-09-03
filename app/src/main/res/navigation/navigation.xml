@@ -13,6 +13,9 @@
         <action android:id="@+id/action_dashboardFragment_to_newAccountFragment"
                 app:destination="@id/newAccountFragment"/>
         <action android:id="@+id/action_dashboardFragment_to_detailsActivity" app:destination="@id/detailsActivity"/>
+        <action
+                android:id="@+id/action_dashboardFragment_to_mainActivity"
+                app:destination="@id/mainActivity" />
     </fragment>
 
     <fragment android:id="@+id/newAccountFragment"
@@ -20,7 +23,7 @@
               android:label="NewAccountFragment"
               tools:layout="@layout/fragment_new_account">
         <action android:id="@+id/action_newAccountFragment_to_dashboardFragment"
-                app:destination="@id/dashboardFragment"/>
+                app:popUpTo="@id/navigation"/>
     </fragment>
 
     <activity android:id="@+id/detailsActivity"
@@ -29,5 +32,9 @@
     tools:layout="@layout/navhost_details">
         <argument android:name="accountId" app:argType="string"/>
     </activity>
+    <activity
+            android:id="@+id/mainActivity"
+            android:name="com.miguel.android.trackyourexpenses.ui.activity.MainActivity"
+            android:label="MainActivity" />
 
 </navigation>
